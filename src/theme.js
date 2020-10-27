@@ -4,7 +4,7 @@ import '@/assets/fonts/fonts.css';
 const colors = {
     primary: {main: '#3C3635', light: '#616161', dark: '#2C2C2C'},
     secondary: {main: '#B9B9B9', light: '#DEDEDE', dark: '#141414'},
-    additional: {black: '#000000', white: '#FFFFFF', menuGrey: '#616161', lightgrey: '#FAFAFA', error: '#ff6347', success: '#00994d'},
+    additional: {black: '#000000', white: '#FFFFFF', menuGrey: '#616161', lightgrey: '#FAFAFA', darkgrey: '#D9D9D9', error: '#ff6347', success: '#00994d'},
 }
 
 const fontFamily = '"Avenir", "Open Sans"';
@@ -13,7 +13,7 @@ const fontFamily = '"Avenir", "Open Sans"';
 const theme = createMuiTheme({
   palette: colors,
   shape: {
-    borderRadius: 4,
+    borderRadius: 0,
   },
   overrides: {
     MuiCssBaseline: {
@@ -59,11 +59,15 @@ const theme = createMuiTheme({
     },
     h2: {
       fontWeight: '500',
-      fontSize: '2.2em',
+      fontSize: '2.4em',
     },
     h3: {
       fontWeight: '700',
       fontSize: '1.2em',
+    },
+    h4: {
+      fontWeight: '700',
+      fontSize: '0.8em',
     },
     subtitle1: {
       fontWeight: 'bold',
@@ -72,8 +76,14 @@ const theme = createMuiTheme({
       fontWeight: 'bold',
       fontStyle: 'italic',
     },
+    caption:{
+      fontSize: '0.8em',
+    },
     body1: {
       fontSize: '1.2em'
+    },
+    body2: {
+      color: colors.primary.light
     }
 
   },
@@ -112,8 +122,9 @@ const theme = createMuiTheme({
 const aButtonsBase = {
   fontFamily: fontFamily,
   fontWeight: 'normal',
-  display: 'inline-block',
-  textAlign: 'center',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   minWidth: '160px',
   height: '40px',
   lineHeight: '40px',
@@ -149,6 +160,21 @@ const aButtonBrown = {
   }
 }
 
+const aButtonBlack = {
+  ...aButtonsBase,
+  borderColor: colors.additional.black,
+  backgroundColor: colors.additional.black,
+  color: colors.secondary.main,
+  '&:visited' : {
+    color: colors.secondary.main,
+  },
+  '&:hover' : {
+    color: colors.additional.white+' !important',
+    borderColor: colors.additional.white,
+    boxShadow: theme.shadows[7],
+  }
+}
+
 const hoverCard = {
   height: '100%',
   width: '100%',
@@ -171,6 +197,7 @@ const hoverCard = {
 
 
 theme.mixins.aButtonBrown = aButtonBrown;
+theme.mixins.aButtonBlack = aButtonBlack;
 theme.mixins.hovercard = hoverCard;
 
 export default theme;

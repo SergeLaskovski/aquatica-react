@@ -18,15 +18,17 @@ const styles = (theme) => ({
       fontWeight: 100,
       fontSize: '0.9em',
       height: '20px',
+      paddingRight: '10px',
     },
     topNavLink: {
       display: 'block',
-      paddingRight: '10px',
+      paddingLeft: '3%',
       color: theme.palette.additional.white,
       textDecoration: 'none',
       "&:hover": {
         color: theme.palette.additional.white,
         textDecoration: 'underline',
+        cursor: 'pointer'
       }
     },
     topNavLinkSelected: {
@@ -44,7 +46,8 @@ const styles = (theme) => ({
       height: '60px',
     },
     whiteNavItemsContainer : {
-      flexGrow: 1
+      flexGrow: 1,
+      paddingLeft: '10%'
     },
     whiteNavLink: {
       display: 'inline-block',

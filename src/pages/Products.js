@@ -17,7 +17,9 @@ import FooterContactBanner from '@/components/layout/FooterContactBanner';
 function Products(props) {
 
   const catDataAll = React.useContext(CategoriesContext);
-  const catsParentSlug = props.match.params.cat;
+  let catsParentSlug='';
+  if(props.match.params.cat){catsParentSlug = encodeURIComponent(props.match.params.cat);}
+
   
   let currentCat = {};
   if( catDataAll.load ) {

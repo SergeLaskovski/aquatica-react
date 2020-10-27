@@ -6,7 +6,9 @@ import CollectionsMegaMenu from '@/components/menus/CollectionsMegaMenu';
 
 import {withStyles} from '@material-ui/core';
 import styles from './MenuStyles';
-import {Grid, Slide} from '@material-ui/core';
+import {Grid, Box, Slide} from '@material-ui/core';
+
+import LoginComponent from '@/components/login/Login';
 
 import LogoTop from '@/assets/images/aquatica-logo-top.png';
 
@@ -29,6 +31,11 @@ function TopMenus(props) {
         <NavLink to="/collections" onClick={toggleCollection} className={ props.class } activeClassName={`${props.classActive} ${classes.cursorPointer}`} title={props.title}>{props.title}</NavLink>
       );
     }
+    if(props.href === '/login'){
+      return (
+        <Box component="div" className={ props.class }><LoginComponent /></Box>
+      );
+    }
     
     if(props.custom){
       return (
@@ -37,8 +44,8 @@ function TopMenus(props) {
     }
     else{
       return (
-        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title}>
-          {props.title}
+        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}>
+
         </NavLink>
       );
     }
@@ -83,7 +90,8 @@ function TopMenus(props) {
       <Grid container 
         className={classes.topNavContainer}
         justify="flex-end"
-        alignItems="center">
+        alignItems="center"
+      >
         {
           menuArr.main.map((menuItem,index) => (
             <CustomNavLink 
@@ -107,7 +115,7 @@ function TopMenus(props) {
                 <NavLink to="/"><img src={LogoTop} alt="Aquatica logo"/></NavLink>
             }
           </Grid>
-          <Grid item container className={classes.whiteNavItemsContainer} justify="flex-end" alignItems="center">
+          <Grid item container className={classes.whiteNavItemsContainer} justify="space-between" alignItems="center">
             {
             menuArr.white.map((menuItem,index) => (
               <CustomNavLink 

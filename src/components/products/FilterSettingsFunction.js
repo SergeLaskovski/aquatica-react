@@ -59,7 +59,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                 pressures = productItem.pressure.split(',');
                 pressures.map((pressure) => {
                     if( pressure !== "N/A" && pressure !== "" && pressure !== "Unknown"){ 
-                        if(pressure !== 'Mains Pressure Only'){ pressure = 'Low Pressure' }
+                        if(pressure !== 'Mains Pressure Only'){ pressure = 'Low and Unequal Pressure' }
                         return (filters.pressures[pressure] = true);
                     }
                     return false;
@@ -185,7 +185,7 @@ export const applyFilter = (filterArr = {}, productsData = []) => {
                 productsArr.map((productItem) => {
                     searchResult = false;
                     //custom conditions for pressure search
-                    if(searchWhere === 'pressure' && searchWhat === "Low Pressure"){
+                    if(searchWhere === 'pressure' && searchWhat === "Low and Unequal Pressure"){
                         if(productItem[searchWhere] !== 'Mains Pressure Only'){
                             searchResult = true;
                         }

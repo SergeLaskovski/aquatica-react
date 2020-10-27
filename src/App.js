@@ -20,11 +20,13 @@ import ScrollToTop from '@/hooks/ScrollTop';
 import {NavigationContextProvider} from '@/context/navigation-context';
 import {CategoriesContextProvider} from '@/context/categories-context';
 import {CollectionsContextProvider} from '@/context/collections-context';
+import {UserContextProvider} from '@/context/user-context';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <UserContextProvider>
       <NavigationContextProvider>
       <CategoriesContextProvider>
       <CollectionsContextProvider>
@@ -37,6 +39,7 @@ function App() {
       </CollectionsContextProvider>
       </CategoriesContextProvider>
       </NavigationContextProvider>
+      </UserContextProvider>
     </ThemeProvider>
   );
 }

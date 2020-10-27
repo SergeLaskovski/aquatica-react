@@ -4,10 +4,12 @@ import {CategoriesContext} from '@/context/categories-context';
 
 import Breadcrumbs from '@/components/products/Breadcrumbs';
 import CatsList from '@/components/products/CatsList';
-import FourtyFour from '@/components/FourtyFour';
 import PordCatSwitch  from '@/components/products/ProdCatSwitch';
 
 import {Box} from '@material-ui/core';
+
+import FourtyFour from '@/components/FourtyFour';
+import Loader from '@/components/Loader';
 
 import FooterContactBanner from '@/components/layout/FooterContactBanner';
 
@@ -20,7 +22,7 @@ function Categories(props) {
   
   let currentCat = {};
   let subCatData = null;
-  if( catDataAll.load ) {    if ( !catsParentSlug ){ currentCat.id = 0; }
+  if( catDataAll.load ) {  if ( !catsParentSlug ){ currentCat.id = 0; }
     else { currentCat =  findCatDataBySlug( catDataAll.data, catsParentSlug ); }
     subCatData = catDataAll.data[currentCat.id];
   }
@@ -45,13 +47,22 @@ function Categories(props) {
           <Breadcrumbs currentCat={props.match.params.cat}/>
           <PordCatSwitch catSlug={catsParentSlug ? catsParentSlug : ""} catName={currentCat.title}/>
           {
-          subCatData ?
-              <CatsList catsParent={currentCat.id}/>
-          : 
-              <FourtyFour msg="No subcategories in this category"/>
+            catDataAll.load ? (
+              <React.Fragment>
+                {
+                  subCatData ? (
+                      <CatsList catsParent={currentCat.id}/>
+                  ) : (
+                      <FourtyFour msg="No subcategories in this category"/>
+                  )
+                }
+              </React.Fragment>
+            ) : (
+              <Loader/>
+            )
           }
         <Box component="div" p={5}></Box>
-      <FooterContactBanner/>
+        <FooterContactBanner/>
     </React.Fragment>
 
   )

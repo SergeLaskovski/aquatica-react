@@ -7,12 +7,14 @@ import '@/assets/css/hamburgers.css'
 
 import {withStyles} from '@material-ui/core';
 import styles from './MenuMobileStyles';
-import {Grid, Divider} from '@material-ui/core';
+import {Grid, Divider, Box} from '@material-ui/core';
 
 import MegamenuMobile from '@/components/menus/MegamenuMobile';
 import CollectionsMegaMenuMobile from '@/components/menus/CollectionsMegaMenuMobile';
 
 import Logo from '@/assets/images/aquatica-logo-top.png';
+
+import LoginComponent from '@/components/login/Login';
 
 
 
@@ -76,6 +78,11 @@ function MenuMobile(props) {
         <NavLink to="/collections" onClick={toggleCollection} className={ props.class } activeClassName={`${props.classActive} ${classes.cursorPointer}`} title={props.title}>{props.title}</NavLink>
       );
     }
+    if(props.href === '/login'){
+      return (
+        <Box component="div" className={ props.class }><LoginComponent /></Box>
+      );
+    }
     
     if(props.custom){
       return (
@@ -84,8 +91,8 @@ function MenuMobile(props) {
     }
     else{
       return (
-        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title}>
-          {props.title}
+        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title}}>
+
         </NavLink>
       );
     }

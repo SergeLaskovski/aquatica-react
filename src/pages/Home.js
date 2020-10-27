@@ -153,7 +153,7 @@ function Home(props) {
           <Typography variant="h2" component="h2">Testimonials</Typography>
         </Grid>
         <Grid item xs={12} md={4} container className={classes.rangeProductsButton} >
-          <a href="/about-us" className={classes.aButtonBrown}>See more</a>
+          <NavLink to="/about-us" className={classes.aButtonBrown}>See more</NavLink>
         </Grid>
       </Grid>
 

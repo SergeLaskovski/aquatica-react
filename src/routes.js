@@ -14,6 +14,13 @@ import Support from '@/pages/Support';
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 import Retailers from '@/pages/Retailers';
+import Vacancies from '@/pages/Vacancies';
+import Inspiration from '@/pages/Inspiration';
+import News from '@/pages/News';
+import EcoOptions from '@/pages/EcoOptions';
+import FactoryShop from '@/pages/FactoryShop';
+import Tips from '@/pages/Tips';
+import Wishlist from '@/pages/Wishlist';
 
 
 
@@ -28,7 +35,14 @@ function MainRoutes() {
     Support: Support,
     Contact: Contact,
     About: About,
-    Retailers: Retailers
+    Retailers: Retailers,
+    Vacancies: Vacancies,
+    Inspiration: Inspiration,
+    News: News,
+    EcoOptions: EcoOptions,
+    FactoryShop: FactoryShop,
+    Tips: Tips,
+    Wishlist: Wishlist
   };
 
   const {navContext} = useContext(NavigationContext);
@@ -68,9 +82,33 @@ function MainRoutes() {
           return (
             <Route key={index} path={`${route.path}`} component={components['Retailers']} />
           )
+        case "/vacancies":
+          return (
+            <Route key={index} path={`${route.path}`} component={components['Vacancies']} />
+          )
+        case "/inspiration":
+          return (
+            <Route key={index} path={`${route.path}`} component={components['Inspiration']} />
+          )
+        case "/news":
+          return (
+            <Route key={index} path={`${route.path}/:postSlug?`} component={components['News']} />
+          )
+        case "/eco-options":
+          return (
+            <Route key={index} path={`${route.path}`} component={components['EcoOptions']} />
+          )
+        case "/factory-shop":
+          return (
+            <Route key={index} path={`${route.path}`} component={components['FactoryShop']} />
+          )
+        case "/tips-videos":
+          return (
+            <Route key={index} path={`${route.path}/:postSlug?`} component={components['Tips']} />
+          )
         default:
           return (
-            <Route exact key={index} path={route.path} component={components[route.component]} />
+            <Route exact key={index} path={`${route.path}`} component={components[route.component]} />
           )
       }
     }
@@ -83,7 +121,7 @@ function MainRoutes() {
     let updatedNavData = [];
     updatedNavData = [...navData];
     updatedNavData.push({path: '/categories', component: 'Categories', title: 'Categories'});
-
+    updatedNavData.push({path: '/wishlist', component: 'Wishlist', title: 'Wishlist'});
 
     return updatedNavData.map((route, index) => (
       

@@ -11,6 +11,8 @@ import Loader from '@/components/Loader';
 
 function CatsList(props) {
 
+  //console.log(props.cat.slug);
+
   const { classes, catsParent, catsNamesStr } = props;
   //catsParent - is an ID of category
 
@@ -82,7 +84,7 @@ function CatsList(props) {
                   <Grid item>
                     <Box component="div" className={`${classes.viewAll} ${open ? classes.viewAllSelected : ''}`}>
                       <span className={classes.darker}>{props.cat.title}</span> CATEGORIES
-                            </Box>
+                      </Box>
                   </Grid>
                   <Grid item className={classes.arrow} >
                     {open ? <span>&#9652;</span> : <span>&#9662;</span>}
@@ -116,9 +118,9 @@ function CatsList(props) {
                       wrap="nowrap"
                       className={classes.catTitleContainer}
                     >
-                      <Grid item>
+                      <Grid item className={open ? classes.viewAllSelected : ''}>
                         VIEW <span className={classes.darker}>{props.cat.title}</span> PRODUCTS
-                            </Grid>
+                      </Grid>
                       <Grid item className={classes.arrow} >
                         <span>&#9656;</span>
                       </Grid>

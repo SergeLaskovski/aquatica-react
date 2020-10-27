@@ -3,6 +3,8 @@ import {NavLink, withRouter} from 'react-router-dom';
 import {withStyles} from '@material-ui/core';
 import styles from './ProductsListStyles.js';
 
+import FourtyFour from '@/components/FourtyFour';
+
 
 import {Grid, Typography, Box} from '@material-ui/core';
 
@@ -14,7 +16,7 @@ function ProductsList(props) {
 
     <Grid container className={classes.catsContainer} alignItems="stretch" justify="flex-start">
       {
-        productsData.length > 0 && (
+        productsData.length > 0 ? (
           productsData.map((product, index) => (
             <Grid item className={classes.catItemContainer} key={`mainPageProduct${index}`}>
               <div className={classes.hoverCard}>
@@ -41,7 +43,9 @@ function ProductsList(props) {
                         <Typography variant="h3" dangerouslySetInnerHTML={{__html: product.title}}></Typography>
                       </Box>
                       <Box component="div" px={3} py={1}>
-                        <Typography component="div" variant="caption">{product.code}</Typography>
+                        <Box component="div" fontStyle="italic">
+                          <Typography component="div" variant="caption">{product.code}</Typography>
+                        </Box>
                         {/*
                         <Typography component="div" variant="caption">colour {product.colour}</Typography>
                         <Typography component="div" variant="caption">shape {product.shape}</Typography>
@@ -50,8 +54,10 @@ function ProductsList(props) {
                         <Typography component="div" variant="caption">{product.priority}</Typography>
                         <Typography component="div" variant="caption">{product.options_spare}</Typography>
                         <Typography component="div" variant="caption">{product.range}</Typography>
+                        <Typography component="div" variant="caption">{product.description}</Typography>
+                        <Typography component="div" variant="caption">{product.short}</Typography>
+                         <Typography component="div" variant="caption">{product.short}</Typography>
                         */}
-                        <Typography component="div" variant="caption">{product.range}</Typography>
                       </Box>
                     </Grid>
                   </Grid>
@@ -59,6 +65,8 @@ function ProductsList(props) {
               </div>
             </Grid>
           ))
+        ) : (
+          <FourtyFour msg="No products in this category"/>
         )
       }
     </Grid>

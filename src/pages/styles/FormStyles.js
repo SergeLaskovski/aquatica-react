@@ -17,7 +17,18 @@ const formStyles = (theme) => ({
     sentMsg: {
         color: theme.palette.additional.success,
         fontWeight: '700'
-    }
+    },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 240,
+    },
+    selectEmpty: {
+        marginTop: theme.spacing(2),
+    },
+    textFieldFileInput : {
+        paddingLeft: '30px'
+  
+    },
 });
 
 export default formStyles;

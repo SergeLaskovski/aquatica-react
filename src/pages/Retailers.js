@@ -1,17 +1,14 @@
-import React, { useRef, useEffect } from 'react';
-import ReactDOM from "react-dom";
-
-import mapboxgl from 'mapbox-gl';
-
-import fetchFakeData from "./api/fetchFakeData";
-import Popup from "./components/Popup";
+import React, { useState, useEffect } from 'react';
 
 import {withStyles} from '@material-ui/core';
 import styles from './RetailersStyles.js';
 import { Grid, Typography, Box} from '@material-ui/core';
-//import Card from '@material-ui/core/Card';
-//import CardContent from '@material-ui/core/CardContent';
-//import CardMedia from '@material-ui/core/CardMedia';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import RetailersMap from '@/components/RetailersMap'
 
 import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
@@ -29,91 +26,41 @@ function Retailers(props) {
     const RETAILERS_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_RETAILERS;
     const retailersData = UseDataApi(RETAILERS_API_URL);
 
-    mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-    const mapContainerRef = useRef(null);
-    const popUpRef = useRef(new mapboxgl.Popup({ offset: 15 }));
-  
-    // initialize map when component mounts
+    const [retailerCity, setRetailerCity] = useState('');
+    
+    const [currPos, setCurrPos] = useState({'currLon': '174.768778', 'currLat': '-36.839979'});
+    //get current location. if not possible use default (Auckland)
     useEffect(() => {
-      const map = new mapboxgl.Map({
-        container: mapContainerRef.current,
-        // See style options here: https://docs.mapbox.com/api/maps/#styles
-        style: "mapbox://styles/mapbox/light-v10",
-        center: [-104.9876, 39.7405],
-        zoom: 9
-      });
-  
-      // add navigation control (zoom buttons)
-      map.addControl(new mapboxgl.NavigationControl(), "bottom-right");
-  
-      map.on("load", () => {
-        // add the data source for new a feature collection with no features
-        map.addSource("random-points-data", {
-          type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features: []
-          }
-        });
-        // now add the layer, and reference the data source above by name
-        map.addLayer({
-          id: "random-points-layer",
-          source: "random-points-data",
-          type: "symbol",
-          layout: {
-            // full list of icons here: https://labs.mapbox.com/maki-icons
-            "icon-image": "bakery-15", // this will put little croissants on our map
-            "icon-padding": 0,
-            'icon-size': 0.25,
-            "icon-allow-overlap": true
-          }
-        });
-      });
-  
-      map.on("moveend", async () => {
-        // get new center coordinates
-        const { lng, lat } = map.getCenter();
-        // fetch new data
-        const results = await fetchFakeData({ longitude: lng, latitude: lat });
-        // update "random-points-data" source with new data
-        // all layers that consume the "random-points-data" data source will be updated automatically
-        map.getSource("random-points-data").setData(results);
-      });
-  
-      // change cursor to pointer when user hovers over a clickable feature
-      map.on("mouseenter", "random-points-layer", e => {
-        if (e.features.length) {
-          map.getCanvas().style.cursor = "pointer";
+      navigator.geolocation.getCurrentPosition(function(position) {
+        setCurrPos({'currLon': position.coords.longitude, 'currLat':  position.coords.latitude});
+      })
+    }, []);
+    
+
+    let mapData = {};
+    const retailersByCity = {};
+    const cities = [];
+    if(retailersData.load){
+      //create retailers array by city
+      retailersData.data.map((retailer) => {
+        if( !retailersByCity[retailer.city] ){ 
+          retailersByCity[retailer.city] = []; 
+          cities.push(retailer.city);
         }
-      });
-  
-      // reset cursor to default when user is no longer hovering over a clickable feature
-      map.on("mouseleave", "random-points-layer", () => {
-        map.getCanvas().style.cursor = "";
-      });
-  
-      // add popup when user clicks a point
-      map.on("click", "random-points-layer", e => {
-        if (e.features.length) {
-          const feature = e.features[0];
-          // create popup node
-          const popupNode = document.createElement("div");
-          ReactDOM.render(<Popup feature={feature} />, popupNode);
-          // set popup on map
-          popUpRef.current
-            .setLngLat(feature.geometry.coordinates)
-            .setDOMContent(popupNode)
-            .addTo(map);
-        }
-      });
-  
-      // clean up on unmount
-      return () => map.remove();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        retailersByCity[retailer.city].push(retailer);
+        return true;
+      })
 
-
-
-
+      //data for map
+      mapData = retailersData
+    }
+    const handleClick = (event) =>{
+      setRetailerCity(event.target.value);
+      setCurrPos({
+        'currLon': retailersByCity[event.target.value][0].longitude,
+        'currLat':  retailersByCity[event.target.value][0].latitude
+      })
+    }
 
     return( 
         <React.Fragment>
@@ -139,13 +86,50 @@ function Retailers(props) {
               <Loader />
             )
         }
-        <div className={classes.mapContainer} ref={mapContainerRef} />
         {
             retailersData.error ? (
                 <Error />
               ) : retailersData.load ? (
                 <React.Fragment>
-                    
+
+                    <Box p={{ xs: 4, lg: 0 }}><RetailersMap retailersData={mapData} mapCenter={currPos}/></Box>
+
+                    <Box p={6}>
+                      <Grid container>
+                        <Grid item xs={12} lg={4}>
+                          <FormControl variant="filled" className={classes.formControl}>
+                            <InputLabel id="city-select-label">Select city</InputLabel>
+                            <Select
+                              labelId="city-select-label"
+                              id="city-select"
+                              value={retailerCity}
+                              onChange={handleClick}
+                              className={classes.selectEmpty}
+                              displayEmpty
+                            >
+                              {
+                                cities.map((city, index) => (
+                                  <MenuItem value={city} key={`city${index}`}>{city}</MenuItem>
+                                ))
+                              }
+                            </Select>
+                          </FormControl>
+                        </Grid>
+                        <Grid item xs={12} lg={6}>
+                              {
+                                retailerCity !== "" && (
+                                    retailersByCity[retailerCity].map((retailerByCityData, index) => (
+                                      <Box py={2} key={`retailerByCity${index}`}>
+                                        <Typography variant="h2">{retailerByCityData.title}</Typography>
+                                        <Typography variant="subtitle1">{retailerByCityData.address}</Typography>
+                                        <Box dangerouslySetInnerHTML={{__html: retailerByCityData.text}}/>
+                                      </Box>
+                                    ))
+                                )
+                              }
+                        </Grid>
+                      </Grid>
+                    </Box>
                 </React.Fragment>
               ) : (
                 <Loader />
