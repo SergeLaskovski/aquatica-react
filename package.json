@@ -17,6 +17,7 @@
     "react-dom": "^16.13.1",
     "react-flippy": "^0.1.5",
     "react-hamburgers": "^1.0.0",
+    "react-horizontal-scrolling-menu": "^0.7.9",
     "react-images": "^1.1.7",
     "react-photo-gallery": "^8.0.0",
     "react-responsive-carousel": "^3.2.9",

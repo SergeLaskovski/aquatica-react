@@ -8,6 +8,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Flippy, { FrontSide, BackSide } from 'react-flippy';
 
+import "@/assets/css/carousel.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
+
 import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
@@ -24,7 +27,20 @@ function About(props) {
     const TEAM_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_TEAM;
     const teamData = UseDataApi(TEAM_API_URL);
 
-    console.log(PAGE_API_URL);
+    //config carousel for featured images
+    const carouselConfig = () => ({
+        showThumbs:  false,
+        showArrows: true,
+        showStatus: false,
+        infiniteLoop: true,
+        autoPlay: true,
+        swipeable: true,
+        interval: 3000,
+        transitionTime: 700,
+        dynamicHeight: false,
+        stopOnHover: true,
+        showIndicators: false
+    });
 
     return(
         <React.Fragment>
@@ -33,12 +49,18 @@ function About(props) {
               <Error />
             ) : pageData.load ? (
                 <React.Fragment>
-                    <Box component="div">
-                        <img 
-                            src={pageData.data.img} alt="Aquatica team"
-                            className={classes.imgSuperFluid}
-                        />
-                    </Box>
+                        <div className={classes.carouselContainer}>
+                            <Carousel {...carouselConfig()}>
+                                {
+                                pageData.data.featuredImgs.map((featuredImg, index) => (
+                                    <div key={index}>
+                                        <img src={featuredImg.full} alt={`About Us ${index}`} />
+                                    </div>
+                                ))
+                                }
+                            </Carousel>
+                        </div>
+
                     <Grid container>
                         <Grid item xs={12} md={6} container alignItems="center">
                             <Typography variant="h1" component="div">
@@ -60,50 +82,58 @@ function About(props) {
             teamData.error ? (
                 <Error />
               ) : teamData.load ? (
-                <Grid container>
-                    <Grid item xs={12}>
+                  <React.Fragment>
                         <Typography variant="h2" component="h2">
                             <Box p={8}>Our Team</Box>
                         </Typography>
-                    </Grid>
-                    <Grid item container spacing={3} justify="center" alignItems="center" className={classes.teamCardsContainer}>
-                            {
-                            teamData.data.map((teamMember, index) => (
-                                <Flippy
-                                    flipOnHover={true} // default false
-                                    flipOnClick={true} // default false
-                                    flipDirection="horizontal" // horizontal or vertical
-                                    key={`teamMember${index}`}
-                                >
-                                    <FrontSide>
-                                        <Card className={classes.cardRoot}>
-                                            <CardMedia
-                                                className={classes.cardMedia}
-                                                image={teamMember.img}
-                                                title={teamMember.name}
-                                            />
-                                            <CardContent>
-                                                <Typography variant="h5" component="div">
-                                                    {teamMember.name}
-                                                </Typography>
-                                                <Box dangerouslySetInnerHTML={{__html: teamMember.position}}></Box>
-                                            </CardContent>
-                                        </Card>
-                                    </FrontSide>
-                                    <BackSide >
-                                        <Card className={classes.cardRoot}>
-                                            <CardContent>
-                                                <Typography variant="h3" dangerouslySetInnerHTML={{__html: teamMember.name}}></Typography>
-                                                <Typography variant="body2" dangerouslySetInnerHTML={{__html: teamMember.contatcs}}></Typography>
-                                                <Box py={2} dangerouslySetInnerHTML={{__html: teamMember.text}}></Box>
-                                            </CardContent>
-                                        </Card>
-                                    </BackSide>
-                                </Flippy>
-                            ))
-                            } 
-                    </Grid>
-                </Grid>
+                    
+                        <Grid  container justify="center" alignItems="center" className={classes.teamCardsContainer}>
+                                {
+                                teamData.data.map((teamMember, index) => (
+                                    <React.Fragment key={`teamMember${index}`}>
+                                        {
+                                            teamMember.name === 'new-row' ? (
+                                                <Grid item xs={12}> </Grid>
+                                            ) : (
+                                                <Grid>
+                                                    <Flippy
+                                                        flipOnHover={true} // default false
+                                                        flipOnClick={true} // default false
+                                                        flipDirection="horizontal" // horizontal or vertical
+                                                    >
+                                                        <FrontSide>
+                                                            <Card className={classes.cardRoot}>
+                                                                <CardMedia
+                                                                    className={classes.cardMedia}
+                                                                    image={teamMember.img ? teamMember.img : process.env.REACT_APP_BASE_URL+'/assets/images/product_img_placeholder.png'}
+                                                                    title={teamMember.name}
+                                                                />
+                                                                <CardContent>
+                                                                    <Typography variant="h5" component="div">
+                                                                        {teamMember.name}
+                                                                    </Typography>
+                                                                    <Box dangerouslySetInnerHTML={{__html: teamMember.position}}></Box>
+                                                                </CardContent>
+                                                            </Card>
+                                                        </FrontSide>
+                                                        <BackSide >
+                                                            <Card className={classes.cardRoot}>
+                                                                <CardContent>
+                                                                    <Typography variant="h3" dangerouslySetInnerHTML={{__html: teamMember.name}}></Typography>
+                                                                    <Typography variant="body2" dangerouslySetInnerHTML={{__html: teamMember.contatcs}}></Typography>
+                                                                    <Box py={2} dangerouslySetInnerHTML={{__html: teamMember.text}}></Box>
+                                                                </CardContent>
+                                                            </Card>
+                                                        </BackSide>
+                                                    </Flippy>
+                                                </Grid>
+                                            )
+                                        }
+                                    </React.Fragment>
+                                ))
+                                } 
+                        </Grid>
+                </React.Fragment>
               ) : (
                 <Loader />
               )

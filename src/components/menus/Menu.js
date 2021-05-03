@@ -9,17 +9,43 @@ import styles from './MenuStyles';
 import {Grid, Box, Slide} from '@material-ui/core';
 
 import LoginComponent from '@/components/login/Login';
+import SearchComponent from '@/components/search/Search';
 
-import LogoTop from '@/assets/images/aquatica-logo-top.png';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+
+import {UserContext} from '@/context/user-context';
+import WishlistNum from '@/components/layout/WishlistNum';
+import ComparelistNum from '@/components/layout/ComparelistNum';
+
+import ChangingLogo from '@/components/layout/ChangingLogo';
+
+import LogoTop1 from '@/assets/images/aquatica-logo-top-plain.png';
+import LogoTop2 from '@/assets/images/aquatica-logo-top-text.png';
 
 //Desktop Top black menu and White menu
 function TopMenus(props) {
   
   const {classes} = props;
+
+  const {loggedUser} = React.useContext(UserContext);
+
   let menuArr = props.menuData;
 
   //Component to create the nav link
   const CustomNavLink = (props) => {
+
+    const [anchorDropEl, setAnchorDropEl] = React.useState(null);
+
+    const handleDropOpen = (event) => {
+      setAnchorDropEl(event.currentTarget);
+    };
+  
+    const handleDropClose = () => {
+      setAnchorDropEl(null);
+    };
+
+    if(props.parent>0) return ('');
 
     if(props.href === '/products' || props.href === '/categories'){
       return (
@@ -31,23 +57,62 @@ function TopMenus(props) {
         <NavLink to="/collections" onClick={toggleCollection} className={ props.class } activeClassName={`${props.classActive} ${classes.cursorPointer}`} title={props.title}>{props.title}</NavLink>
       );
     }
-    if(props.href === '/login'){
-      return (
-        <Box component="div" className={ props.class }><LoginComponent /></Box>
-      );
-    }
-    
     if(props.custom){
       return (
         <a href={props.href} className={ props.class } title={props.title}>{props.title}</a>
       );
     }
     else{
-      return (
-        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}>
+      let dropChildren = [];
+      menuArr.main.map(menuItem => {
+        if (menuItem.parent*1 === props.ID){
+          dropChildren.push(menuItem)
+        }
+        return true;
+      })
+      if(dropChildren.length>0){
+        return (
+          <React.Fragment>
+            <NavLink 
+              exact to={props.href}
+              className={props.class}
+              activeClassName={props.classActive}
+              title={props.title}
+              onMouseEnter={(event)=>handleDropOpen(event)}
+              aria-controls={props.ID}
+              aria-haspopup="true"
+              dangerouslySetInnerHTML={{__html: props.title}}>
+            </NavLink>
+            <Menu
+              id={props.ID}
+              anchorEl={anchorDropEl}
+              keepMounted
+              open={Boolean(anchorDropEl)}
+              onClose={handleDropClose}
+              disableAutoFocusItem 
+              disableScrollLock={true}
+              classes={{ paper: classes.menuPaper }}
+              PaperProps={{onMouseLeave: handleDropClose}}
+            >
+              <MenuItem>
+                <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+              </MenuItem>
+              {
+              dropChildren.map((dropChild, index) => (
+                <MenuItem key={`dropChild${index}`}>
+                  &nbsp;&nbsp;&#8212;&nbsp;&nbsp;<NavLink exact to={dropChild.path} className={props.class} activeClassName={props.classActive} title={dropChild.title} dangerouslySetInnerHTML={{__html: dropChild.title}}></NavLink>
+                </MenuItem>
+              ))
+              }
+            </Menu>
+          </React.Fragment>
+        );
+      } else {
+        return (
+          <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+        );
+      }
 
-        </NavLink>
-      );
     }
   }
 
@@ -93,29 +158,39 @@ function TopMenus(props) {
         alignItems="center"
       >
         {
+          loggedUser && (
+            <React.Fragment>
+              <WishlistNum class={classes.topNavLink}/>
+              <ComparelistNum class={classes.topNavLink}/>
+            </React.Fragment>
+          )
+        }
+        {
           menuArr.main.map((menuItem,index) => (
             <CustomNavLink 
               key={`topmenuhref-${index}`}
+              ID = {menuItem.ID}
               custom={menuItem.custompath}
               href={menuItem.path}
               class={classes.topNavLink}
+              parent={menuItem.parent}
               classActive={classes.topNavLinkSelected}
               title={menuItem.title}
               locationPath = {locationPath}
             />
           ))
         }
+        <Box component="div" className={ classes.topNavLink }><LoginComponent /></Box>
       </Grid>
       <Grid container className={classes.whiteNavContainer} alignItems="center" wrap="nowrap">
           <Grid item>
-            {
-              props.location.pathname === '/' ?
-                <img src={LogoTop} alt="Aquatica logo"/>
-                : 
-                <NavLink to="/"><img src={LogoTop} alt="Aquatica logo"/></NavLink>
-            }
+
+                <NavLink to={'/'} className={props.location.pathname === '/' ? classes.navLinkDisabled : ''}>
+                   <ChangingLogo logo1={LogoTop1} logo2={LogoTop2}/>
+                </NavLink>
+
           </Grid>
-          <Grid item container className={classes.whiteNavItemsContainer} justify="space-between" alignItems="center">
+          <Grid item container className={classes.whiteNavItemsContainer} justify="flex-end" alignItems="center">
             {
             menuArr.white.map((menuItem,index) => (
               <CustomNavLink 
@@ -129,6 +204,7 @@ function TopMenus(props) {
               />
             ))
             }
+            <Box component="div" className={ props.class }><SearchComponent /></Box>
           </Grid>
           <Slide direction="down" in={mmOpen} timeout={ 700 }  >
             <div className={classes.megamenu}>

@@ -22,11 +22,11 @@ const styles = (theme) => ({
     },
   },
   imgBG: {
-    height: '100%',
+    //height: '100%',
     //backgroundImage: 'url("'+imgMM+'")',
-    backgroundPosition: 'center center',
+    backgroundPosition: 'top center',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     transition: theme.transitions.create(
       ['background-image'],
       { duration: theme.transitions.duration.complex }
@@ -120,6 +120,19 @@ const styles = (theme) => ({
       fontWeight: 'bold',
       cursor: 'pointer',
       color: theme.palette.primary.dark
+    }
+  },
+  allCollections: {
+    float: 'right',
+    marginRight: '10%',
+    textTransform: 'uppercase',
+    textDecoration: 'none',
+    color:  theme.palette.primary.dark,
+    fontWeight: 'bold',
+    "&:hover" :{
+      color: theme.palette.primary.main,
+      cursor: 'pointer',
+      textDecoration: 'underline'
     }
   },
   columns: {

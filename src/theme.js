@@ -22,7 +22,7 @@ const theme = createMuiTheme({
           fontFamily: fontFamily,
           backgroundColor: colors.additional.white,
           fontWeight: '400',
-          fontSize: '14px;',
+          fontSize: '16px;',
           color: colors.additional.black,
           height: '100vh',
           minHeight: '550px',
@@ -63,11 +63,11 @@ const theme = createMuiTheme({
     },
     h3: {
       fontWeight: '700',
-      fontSize: '1.2em',
+      fontSize: '1.8em',
     },
     h4: {
       fontWeight: '700',
-      fontSize: '0.8em',
+      fontSize: '1.2em',
     },
     subtitle1: {
       fontWeight: 'bold',
@@ -83,6 +83,7 @@ const theme = createMuiTheme({
       fontSize: '1.2em'
     },
     body2: {
+      fontSize: '1.2em',
       color: colors.primary.light
     }
 
@@ -95,8 +96,9 @@ const theme = createMuiTheme({
     },
     imgSuperFluid: {
       width: '100%',
-      height: 'auto',
-      objectFit: 'contain'
+      height: '100%',
+      margin: 0,
+      padding: 0
     },
     aNone: {
       textDecoration: 'none',
@@ -122,6 +124,7 @@ const theme = createMuiTheme({
 const aButtonsBase = {
   fontFamily: fontFamily,
   fontWeight: 'normal',
+  fontSize: '.9em',
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -132,6 +135,7 @@ const aButtonsBase = {
   borderStyle: 'solid',
   textDecoration: 'none',
   cursor: 'pointer',
+  pointerEvents: 'auto',
   transition: theme.transitions.create(
     ['box-shadow', 'border-color', 'color'],
     { duration: theme.transitions.duration.complex }
@@ -199,5 +203,9 @@ const hoverCard = {
 theme.mixins.aButtonBrown = aButtonBrown;
 theme.mixins.aButtonBlack = aButtonBlack;
 theme.mixins.hovercard = hoverCard;
+theme.mixins.maxWidth = {
+  maxWidth: '2200px',
+  margin: '0 auto'
+}
 
 export default theme;

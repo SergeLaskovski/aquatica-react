@@ -55,6 +55,31 @@ const styles = (theme) => ({
     
   },
   aButtonBrown: theme.mixins.aButtonBrown,
+  newsHeaders:{
+    [theme.breakpoints.down('sm')]: {
+      display: 'block',
+      borderBottom: 'none',
+    },
+    display: 'flex',
+    alignItems: 'center',
+    borderBottom: "1px solid "+theme.palette.additional.menuGrey,
+    margin: "0 4em",
+  },
+  newsHeader:{
+    padding: '1em',
+    color: theme.palette.primary.dark,
+    cursor: 'pointer',
+    fontSize: '1.6em',
+    '&:hover':{
+      color: theme.palette.additional.black,
+    }
+  },
+  newsHeaderSelected:{
+    fontWeight: 'bold',
+    color: theme.palette.additional.black,
+    cursor: 'initial',
+    borderBottom: "4px solid "+theme.palette.additional.menuGrey,
+  }
 });
 
 

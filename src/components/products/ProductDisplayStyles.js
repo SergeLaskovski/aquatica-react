@@ -74,7 +74,24 @@ const styles = (theme) => ({
     justfyStart : {
         justifyContent: 'flex-start !important',
         paddingLeft: '0.8em',
-    }
+    },
+    popover:{
+        padding: '2%',
+        boxShadow: theme.shadows[7],
+        maxWidth: '400px;'
+    },
+    closeBtn: {
+        position: 'absolute',
+        top: ' 10px',
+        right: '20px',
+        fontSize: '1.6em',
+        color: theme.palette.primary.main,
+        "&:hover":{
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        color: theme.palette.primary.dark
+        }
+    },
 });
 
 

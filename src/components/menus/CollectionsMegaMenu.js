@@ -12,7 +12,6 @@ import {withStyles} from '@material-ui/core';
 import styles from './MegamenuStyles';
 import {Grid, Typography, Box} from '@material-ui/core';
 
-import defaultBG from '@/assets/images/collections_mm.jpg';
 
 function CollectionsMegamenu(props) {
 
@@ -20,23 +19,27 @@ function CollectionsMegamenu(props) {
 
     const mmData = React.useContext(CollectionsContext);
 
+    const {updateBgImage} = React.useContext(ColMmBgImageContext);
 
     //first and second level items
     const MegamenuItems = (props) => {
+       
         const {updateBgImage} = React.useContext(ColMmBgImageContext);
-
+        const findUpdateBgImage = (menuItemSLUG) => {
+            updateBgImage(menuItemSLUG);
+        }
         return (
 
             <Grid item xs={12} md={9} container justify="space-between" className={classes.mmContainer}>
                 {
                 mmData.data[0].map((mmTop,index) => (
-                    <Grid item xs={12} md key={`mm-column-${index}`} className={`${classes.mmColumn}`} onMouseOver={()=>updateBgImage(mmTop.img)}>
+                    <Grid item xs={12} md key={`mm-column-${index}`} className={`${classes.mmColumn}`}>
                         <Box pb={2}><Typography variant="h3">{mmTop.title}</Typography></Box>
                         <div className={mmData.data[mmTop.id].length>10 ? classes.columns : ''}>
                           {
                           mmData.data[mmTop.id] && (
                               mmData.data[mmTop.id].map((mmSub,index2) => (
-                                  <NavLink to={`/collections/${mmSub.slug}`} className={classes.mmItem} key={index2}>
+                                  <NavLink to={`/collections/${mmSub.slug}`} className={classes.mmItem} key={index2} onMouseOver={()=>findUpdateBgImage(mmSub.title)}>
                                     {mmSub.title}
                                   </NavLink>
                               ))
@@ -46,7 +49,9 @@ function CollectionsMegamenu(props) {
                     </Grid>
                 ))
                 }
-                                          
+                <Grid item xs={12}>
+                    <NavLink to="/collections/" className={`${classes.allCollections}`} >All collections</NavLink>
+                </Grid>                          
             </Grid>
 
         )
@@ -58,10 +63,12 @@ function CollectionsMegamenu(props) {
             <Grid item xs={12} md={3}
                 className={classes.imgBG}
                 style={{backgroundImage: 'url('+bgImage+')'}} 
-                onMouseOver={()=>updateBgImage(defaultBG)}
+                onMouseOver={()=>updateBgImage('default')}
             />
         )
     }
+
+    updateBgImage('default');
 
     return mmData.error ? (
         <Error />

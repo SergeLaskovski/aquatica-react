@@ -68,7 +68,7 @@ function CatsList(props) {
 
               <Grid item className={classes.flexGrow}>
                 <Box component="div" px={1} pt={1}>
-                  <Typography variant="h3" component="span">{props.cat.title}</Typography>
+                  <Typography variant="h4" component="span">{props.cat.title}</Typography>
                 </Box>
               </Grid>
 

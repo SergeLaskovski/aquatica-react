@@ -54,7 +54,7 @@ function LoginForm(props) {
                 setPhone('');
                 setCompany('');
                 setLocation('');
-                setSuccessMessage('You are now registered and looged in');
+                setSuccessMessage('You are now registered and loged in');
                 setTimeout( props.closeForm, 2500);
             }
             else{
@@ -71,7 +71,7 @@ function LoginForm(props) {
 
     return (
         <Grid container>
-            <Grid item xs={false} md={6} className={classes.loginImg}>
+            <Grid item xs={false} md={6} className={classes.registerImg}>
                 
             </Grid>
             <Grid item xs={12} md={6}>

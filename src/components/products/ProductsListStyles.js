@@ -1,3 +1,4 @@
+
 const styles = (theme) => ({  
   catsContainer:{
     padding: '6px',
@@ -14,6 +15,12 @@ const styles = (theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '50%',
     }
+  },
+  fullWidthContiner:{
+    padding: '6px',
+    whiteSpace: 'normal',
+    height: '350px',
+    width: '350px'
   },
   aNone: theme.mixins.aNone,
   productItmeContainer: {
@@ -36,7 +43,34 @@ const styles = (theme) => ({
   flexGrow: {
       flexGrow: 1,
   },
- 
+  closeBtn: {
+    position: 'absolute',
+    top: '0px',
+    right: '0px',
+    display: 'inline-block',
+    fontSize: '2em',
+    fontWeight: 'light',
+    color: theme.palette.primary.main,
+    "&:hover":{
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    color: theme.palette.primary.dark
+    }
+  },
+  popoverContainer:{
+    pointerEvents: "none"
+  },
+  popoverContent:{
+    boxShadow: theme.shadows[7],
+    maxWidth: '400px;',
+    pointerEvents: "auto"
+  },
+  starGrey :{
+    color: theme.palette.additional.darkgrey,
+  },
+  starBlack :{
+      color: theme.palette.primary.main,
+  },
 });
 
 export default styles;

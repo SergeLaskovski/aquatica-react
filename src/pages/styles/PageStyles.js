@@ -6,6 +6,7 @@ const pageStyles = (theme) => ({
     flexGrow: {
         flexGrow: 1,
     },
+    aNone: {...theme.mixins.aNone}
 });
 
 export default pageStyles;

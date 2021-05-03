@@ -2,8 +2,8 @@ import React from 'react';
 import {NavLink, withRouter} from 'react-router-dom';
 
 import {CategoriesContext} from '@/context/categories-context';
-import {MmBgImageContextProvider} from '@/context/mm-bgimage-context';
-import {MmBgImageContext} from '@/context/mm-bgimage-context';
+import {CatMmBgImageContextProvider} from '@/context/categories-mm-bgimage-context';
+import {CatMmBgImageContext} from '@/context/categories-mm-bgimage-context';
 
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
@@ -13,7 +13,6 @@ import styles from './MegamenuStyles';
 import {Grid} from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
 
-import defaultBG from '@/assets/images/products_mm.jpg';
 
 function Megamenu(props) {
 
@@ -24,12 +23,19 @@ function Megamenu(props) {
 
     //third level items
     const MegaCollapsible = (props) => {
+        
         const [checked, setChecked] = React.useState(false);
         const handleChange = (event) => {
             event.preventDefault();
             event.stopPropagation();
             setChecked((prev) => !prev);
         };
+
+        const {updateBgImage} = React.useContext(CatMmBgImageContext);
+        const findUpdateBgImage = (menuItemSLUG) => {
+            updateBgImage(menuItemSLUG);
+        }
+
         return (
             <div>
                 {
@@ -39,7 +45,7 @@ function Megamenu(props) {
                         
                         <Grid container alignItems="center" wrap="nowrap">
                             <Grid item xs={8}>
-                                <NavLink to={`/categories/${props.data.slug}`} className={classes.mmItem}>
+                                <NavLink to={`/categories/${props.data.slug}`} className={classes.mmItem} onMouseOver={()=>findUpdateBgImage(props.data.title)}>
                                     {props.data.title}
                                 </NavLink>
                             </Grid>
@@ -53,7 +59,7 @@ function Megamenu(props) {
                             <div className={classes.mmSubContainer}>
                             {
                             mmData.data[props.data.id].map((mmSubSub,index) => (
-                                <NavLink to={`/products/${mmSubSub.slug}`} key={`mm-subsubitem-${index}`} className={classes.mmItem}>
+                                <NavLink to={`/products/${mmSubSub.slug}`} key={`mm-subsubitem-${index}`} className={classes.mmItem} onMouseOver={()=>findUpdateBgImage(mmSubSub.title)}>
                                     {mmSubSub.title}
                                 </NavLink>
                             ))
@@ -65,7 +71,7 @@ function Megamenu(props) {
                         </Collapse>
                     </React.Fragment>
                 ) : (//if no subsubmenu
-                    <NavLink to={`/products/${props.data.slug}`} className={classes.mmItem}>
+                    <NavLink to={`/products/${props.data.slug}`} className={classes.mmItem} onMouseOver={()=>findUpdateBgImage(props.data.title)}>
                         {props.data.title}
                     </NavLink>
                 )
@@ -80,14 +86,13 @@ function Megamenu(props) {
 
     //first and second level items
     const MegamenuItems = (props) => {
-        const {updateBgImage} = React.useContext(MmBgImageContext);
 
         return (
 
             <Grid item xs={9} container justify="space-between" className={classes.mmContainer}>
                 {
                 mmData.data[0].map((mmTop,index) => (
-                    <Grid item key={`mm-column-${index}`} className={classes.mmColumn} onMouseOver={()=>updateBgImage(mmTop.img)}>
+                    <Grid item key={`mm-column-${index}`} className={classes.mmColumn}>
                         <NavLink  to={`/categories/${mmTop.slug}`} className={classes.topLvlItem}>{mmTop.title}</NavLink>
                         {
                         mmData.data[mmTop.id] ? (
@@ -109,12 +114,12 @@ function Megamenu(props) {
     }
 
     const BgImageComponent = () =>{
-        const {bgImage,updateBgImage} = React.useContext(MmBgImageContext);
+        const {bgImage,updateBgImage} = React.useContext(CatMmBgImageContext);
         return (
-            <Grid item xs={3}
+            <Grid item xs={12} md={3}
                 className={classes.imgBG}
                 style={{backgroundImage: 'url('+bgImage+')'}} 
-                onMouseOver={()=>updateBgImage(defaultBG)}
+                onMouseOver={()=>updateBgImage('default')}
             />
         )
     }
@@ -126,10 +131,10 @@ function Megamenu(props) {
 
             <Grid container className={classes.root}>
                 <span className={classes.closeBtn} onClick={props.closeAllSlides}>&#215;</span>
-                <MmBgImageContextProvider>
+                <CatMmBgImageContextProvider>
                     <BgImageComponent/>
                     <MegamenuItems/>
-                </MmBgImageContextProvider>
+                </CatMmBgImageContextProvider>
             </Grid>
 
         </React.Fragment>

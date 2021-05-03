@@ -35,10 +35,10 @@ function Footer(props) {
           </Box>
         </Grid>
       </Grid>
-      <Grid container className={classes.footerMenuContainer}>
-        <Grid item className={classes.footerColumnMenu}>
-          <Typography variant="h3" className={classes.footerHeader}>AQUATICA</Typography><br/>
-            <div className={classes.columns}>
+      <Grid container justify="space-between">
+        <Grid item className={classes.footerColumn}>
+          <Typography variant="h4" className={classes.footerHeader}>AQUATICA</Typography><br/>
+
             {
               footerMenuData.error ? (
                 <Error />
@@ -50,8 +50,8 @@ function Footer(props) {
                       to={footerMenuItem.path}
                       className={classes.footerMenuItem}
                       activeClassName={classes.footerMenuItemSelected}
+                      dangerouslySetInnerHTML={{__html:footerMenuItem.title}}
                     >
-                      {footerMenuItem.title}
                     </NavLink>
                   </Box>
                 ))
@@ -59,32 +59,30 @@ function Footer(props) {
                 <Loader />
               )
             }
-            </div>
         </Grid>
-        <Grid item  className={classes.footerColumn}>
-        {
-            pageData.error ? (
-              <Error />
-            ) : pageData.load ? (
-                    <Grid container justify="center">
-                        <Grid item xs={12} md className={classes.addrItem}>
-                            <Typography variant="h3" className={classes.footerHeader}>{pageData.data.addr1Title}</Typography><br/>
-                            <div dangerouslySetInnerHTML={{__html: pageData.data.addr1}} ></div>
-                        </Grid>
-                        <Grid item xs={12} md className={classes.addrItem}>
-                            <Typography variant="h3"  className={classes.footerHeader}>{pageData.data.addr2Title}</Typography><br/>
-                            <div dangerouslySetInnerHTML={{__html: pageData.data.addr2}} ></div>
-                        </Grid>
-                        <Grid item xs={12} md className={classes.addrItem}>
-                            <Typography variant="h3" className={classes.footerHeader}>{pageData.data.addr3Title}</Typography><br/>
-                            <div dangerouslySetInnerHTML={{__html: pageData.data.addr3}} ></div>
-                        </Grid>
-                    </Grid>
-            ) : (
-              <Loader />
-            )
-        }
+        <Grid item className={classes.footerColumn}>
+            <Typography variant="h4" className={classes.footerHeader}>Technical info</Typography><br/>
+            <div><NavLink to="/tips-videos" className={classes.footerMenuItem} activeClassName={classes.footerMenuItemSelected}>Hints & Tips</NavLink></div>
+            <div><NavLink to="/tips-videos/wels-in-a-nutshell" className={classes.footerMenuItem} activeClassName={classes.footerMenuItemSelected}>WELLS Information</NavLink></div>
         </Grid>
+      {
+          pageData.error ? (
+            <Error />
+          ) : pageData.load ? (
+              <React.Fragment>
+                <Grid item className={classes.footerColumn}>
+                    <Typography variant="h4" className={classes.footerHeader}>{pageData.data.addr1Title}</Typography>
+                    <div dangerouslySetInnerHTML={{__html: pageData.data.addr1}} ></div>
+                </Grid>
+                <Grid item className={classes.footerColumn}>
+                    <Typography variant="h4"  className={classes.footerHeader}>{pageData.data.addr2Title}</Typography>
+                    <div dangerouslySetInnerHTML={{__html: pageData.data.addr2}} ></div>
+                </Grid>
+              </React.Fragment>
+          ) : (
+            <Loader />
+          )
+      }
       </Grid>
       <Grid 
         container 

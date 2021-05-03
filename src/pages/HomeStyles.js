@@ -7,23 +7,34 @@ const styles = (theme) => ({
   },
   topHeader: {
     position: 'absolute',
-    top: '20%',
-    left: '10%',
-    right: '10%', 
+    top: '0%',
+    left: '0%',
     zIndex: 2,
-    marginLeft: 'auto', 
-    marginRight: 'auto',
-    padding: '0 15%',
-    textAlign: 'center',
-    textShadow: '2px 2px 4px #111111;',
-    color: theme.palette.additional.white,
+    width: '100%',
+    height: '200px',
     [theme.breakpoints.up('sm')]: {
-      top: '15%',
-      padding: '0 5%',
+      height: '200px',
+      padding: '0 10%',
     },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 20%',
+      height: '400px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      padding: '0 30%',
+      height: '650px',
+    },
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    textShadow: '1px 1px 3px #999999;',
+    color: theme.palette.additional.white,
   },
   topText: {
-    fontSize: '1.2em'
+    marginTop: '2em',
+    fontSize: '1.4em'
   },
   topTextMobile: {
     backgroundColor: theme.palette.primary.main,
@@ -31,7 +42,6 @@ const styles = (theme) => ({
     marginRight: 'auto',
     padding: '5%',
     textAlign: 'center',
-    textShadow: '2px 2px 4px #111111;',
     color: theme.palette.additional.white,
     fontSize: '1.1em'
   },
@@ -43,7 +53,7 @@ const styles = (theme) => ({
     justifyContent: "flex-start",
     [theme.breakpoints.down('sm')]: {
       justifyContent: "center",
-      padding: "5%",
+      padding: "0 5% 5% 5%",
     },
   },
   rangeProductsButton:{
@@ -139,6 +149,20 @@ const styles = (theme) => ({
     fontSize: '1.1em',
     verticalAlign: 'middle'
   },
+  scrollChevron:{
+    cursor: "pointer",
+    fontSize: '3em',
+    color: theme.palette.primary.main,
+    '&:hover':{
+      color: theme.palette.secondary.main
+    }
+  },
+  arrowDisabledClass:{
+    visibility: 'hidden'
+  },
+  imgSuperFluid:{
+    ...theme.mixins.imgSuperFluid
+  }
 
 });
 

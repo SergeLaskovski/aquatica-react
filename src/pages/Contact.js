@@ -71,6 +71,7 @@ function Contact(props) {
                     <form onSubmit={handleSubmit}>
                     <Box component="div" pb={5} dangerouslySetInnerHTML={{__html: pageData.data.gmap}} ></Box>
                     <Grid container justify="center">
+                        {/*
                         <Grid item xs={12} md className={classes.addrItem}>
                             <Typography variant="h3">{pageData.data.addr1Title}</Typography><br/>
                             <div dangerouslySetInnerHTML={{__html: pageData.data.addr1}} ></div>
@@ -83,6 +84,7 @@ function Contact(props) {
                             <Typography variant="h3">{pageData.data.addr3Title}</Typography><br/>
                             <div dangerouslySetInnerHTML={{__html: pageData.data.addr3}} ></div>
                         </Grid>
+                        */}
                         <Grid item container justify="center" xs={12}>
                             <Grid container spacing={2} className={classes.contactFormContainer}>
                                 <Grid item xs={12}>

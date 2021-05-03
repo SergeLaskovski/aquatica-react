@@ -21,8 +21,8 @@ import EcoOptions from '@/pages/EcoOptions';
 import FactoryShop from '@/pages/FactoryShop';
 import Tips from '@/pages/Tips';
 import Wishlist from '@/pages/Wishlist';
-
-
+import Comparelist from '@/pages/Comparelist';
+import Testimonials from '@/pages/Testimonials';
 
 
 function MainRoutes() {
@@ -42,7 +42,9 @@ function MainRoutes() {
     EcoOptions: EcoOptions,
     FactoryShop: FactoryShop,
     Tips: Tips,
-    Wishlist: Wishlist
+    Wishlist: Wishlist,
+    Comparelist: Comparelist,
+    Testimonials: Testimonials
   };
 
   const {navContext} = useContext(NavigationContext);
@@ -96,7 +98,7 @@ function MainRoutes() {
           )
         case "/eco-options":
           return (
-            <Route key={index} path={`${route.path}`} component={components['EcoOptions']} />
+            <Route key={index} path={`${route.path}/:postSlug?`} component={components['EcoOptions']} />
           )
         case "/factory-shop":
           return (
@@ -106,6 +108,10 @@ function MainRoutes() {
           return (
             <Route key={index} path={`${route.path}/:postSlug?`} component={components['Tips']} />
           )
+        case "/testimonials":
+          return (
+            <Route key={index} path={`${route.path}`} component={components['Testimonials']} />
+          )
         default:
           return (
             <Route exact key={index} path={`${route.path}`} component={components[route.component]} />
@@ -113,15 +119,13 @@ function MainRoutes() {
       }
     }
 
-
-
-
     //additional paths, that are not defined in WP Main Menu
     //route.push({path: 'Categories',component: 'categories'});
     let updatedNavData = [];
     updatedNavData = [...navData];
     updatedNavData.push({path: '/categories', component: 'Categories', title: 'Categories'});
     updatedNavData.push({path: '/wishlist', component: 'Wishlist', title: 'Wishlist'});
+    updatedNavData.push({path: '/comparelist', component: 'Comparelist', title: 'Comparelist'});
 
     return updatedNavData.map((route, index) => (
       

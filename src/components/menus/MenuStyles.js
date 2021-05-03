@@ -1,7 +1,7 @@
 
 const styles = (theme) => ({
     topMenuPlaceholder:{
-      height: '80px'
+      height: '90px'
     },
     menuContainer: {
       flexGrow: 1,
@@ -10,15 +10,15 @@ const styles = (theme) => ({
       zIndex: 10,
       top: 0,
       left: 0,
-      boxShadow: theme.shadows[3]
+      boxShadow: theme.shadows[3],
     },
     topNavContainer: {
       flexGrow: 1,
       backgroundColor: theme.palette.additional.black,
       fontWeight: 100,
-      fontSize: '0.9em',
-      height: '20px',
-      paddingRight: '10px',
+      fontSize: '1em',
+      height: '30px',
+      paddingRight: '25px'
     },
     topNavLink: {
       display: 'block',
@@ -38,6 +38,9 @@ const styles = (theme) => ({
         textDecoration: 'none',
       }
     },
+    navLinkDisabled: {
+      pointerEvents: 'none'
+    },
     whiteNavContainer: {
       flexGrow: 1,
       backgroundColor: theme.palette.additional.white,
@@ -47,11 +50,17 @@ const styles = (theme) => ({
     },
     whiteNavItemsContainer : {
       flexGrow: 1,
-      paddingLeft: '10%'
+      marginRight: '25px'
     },
     whiteNavLink: {
       display: 'inline-block',
-      paddingRight: '10px',
+      paddingRight: '6%',
+      [theme.breakpoints.down('lg')]: {
+        paddingRight: '4%',
+      },
+      [theme.breakpoints.down('md')]: {
+        paddingRight: '2%',
+      },
       textTransform: 'uppercase',
       color: theme.palette.additional.black,
       textDecoration: 'none',
@@ -100,6 +109,11 @@ const styles = (theme) => ({
     cursorPointer: {
       cursor: 'pointer'
     },
+    menuPaper:{
+      backgroundColor:  theme.palette.additional.black,
+      fontSize: '12px !important',
+      color: theme.palette.additional.white
+    }
 });
 
 export default styles;

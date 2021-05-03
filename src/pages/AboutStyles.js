@@ -3,6 +3,10 @@ import pageStyles from './styles/PageStyles';
 
 const styles = (theme) => ({
   ...pageStyles(theme),
+  carouselContainer: {
+    position: 'relative',
+    minHeight: '200px'
+  },
   cardRoot: {
     width: '350px',
     height: '100%',
@@ -12,7 +16,6 @@ const styles = (theme) => ({
     height: 350,
   },
   teamCardsContainer: {
-    padding: '5%',
     '& .flippy-front, .flippy-back':{
       boxShadow: 'none !important'
     }

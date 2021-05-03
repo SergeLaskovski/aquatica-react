@@ -100,6 +100,9 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.additional.white,
       minHeight: '560px',
     },
+    navLinkDisabled: {
+      pointerEvents: 'none'
+    }
 });
 
 export default styles;

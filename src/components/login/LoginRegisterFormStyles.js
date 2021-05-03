@@ -1,5 +1,6 @@
 import formStyles from '@/pages/styles/FormStyles';
-import loginImgFile from '@/assets/images/login.jpg'
+import loginImgFile from '@/assets/images/login.jpg';
+import registerImgFile from '@/assets/images/register.jpg';
 
 
 const styles = (theme) => ({
@@ -7,6 +8,10 @@ const styles = (theme) => ({
     loginImg: {
         ...theme.mixins.bgFluid,
         backgroundImage: ('url('+loginImgFile+')'),
+    },
+    registerImg: {
+        ...theme.mixins.bgFluid,
+        backgroundImage: ('url('+registerImgFile+')'),
     },
     switchSpan: {
         cursor: 'pointer',

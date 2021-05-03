@@ -26,8 +26,8 @@ const styles = (theme) => ({
   catImgContainer:{
     ...theme.mixins.bgFluid,
     width: '100%',
-    height: '250px',
-    maxHeight: '250px',
+    height: '350px',
+    maxHeight: '350px',
     overflow: 'hidden',
   },
   flexGrow: {

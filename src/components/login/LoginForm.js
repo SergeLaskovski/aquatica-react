@@ -35,6 +35,7 @@ function LoginForm(props) {
         }
         axios.post(API_URL, form)
         .then((response) => {
+            //console.log(response);
             if(response.data.ID){
                 //const cookies = new Cookies();
                 //cookies.set('aqauaticaUser', name, { path: '/', expires: new Date(Date.now()+3600000*24*14) });
@@ -43,7 +44,7 @@ function LoginForm(props) {
                 updateLoggedUser(name);
                 setName('');
                 setPassword('');
-                setSuccessMessage('You are now looged in');
+                setSuccessMessage('You are now loged in');
                 setTimeout( props.closeForm, 2000);
             }
             else{
@@ -148,7 +149,7 @@ function LoginForm(props) {
                             method="post" action={`${process.env.REACT_APP_BASE_URL}/cms/user-login/`}
                         >
                             <input type="hidden" name="username" value={name}/>
-                            <input type="hidden" name="password" value={password}/>
+                            <input type="hidden" name="userpassword" value={password}/>
                         </form>
                         <Box py={2}>
                             Don't have account? <span onClick={()=>props.setShowForm()} className={classes.switchSpan}>Register here</span>

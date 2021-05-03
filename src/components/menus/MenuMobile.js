@@ -12,16 +12,28 @@ import {Grid, Divider, Box} from '@material-ui/core';
 import MegamenuMobile from '@/components/menus/MegamenuMobile';
 import CollectionsMegaMenuMobile from '@/components/menus/CollectionsMegaMenuMobile';
 
-import Logo from '@/assets/images/aquatica-logo-top.png';
+import {UserContext} from '@/context/user-context';
+
+import WishlistNum from '@/components/layout/WishlistNum';
+import ComparelistNum from '@/components/layout/ComparelistNum';
+
+import ChangingLogo from '@/components/layout/ChangingLogo';
+
+import LogoTop1 from '@/assets/images/aquatica-logo-top-plain.png';
+import LogoTop2 from '@/assets/images/aquatica-logo-top-text.png';
 
 import LoginComponent from '@/components/login/Login';
+import SearchComponent from '@/components/search/Search';
 
 
 
 //Mobile menu
 function MenuMobile(props) {
 
+  
   const {classes} = props;
+  const {loggedUser} = React.useContext(UserContext);
+
   let menuArr = props.menuData;
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   
@@ -78,12 +90,6 @@ function MenuMobile(props) {
         <NavLink to="/collections" onClick={toggleCollection} className={ props.class } activeClassName={`${props.classActive} ${classes.cursorPointer}`} title={props.title}>{props.title}</NavLink>
       );
     }
-    if(props.href === '/login'){
-      return (
-        <Box component="div" className={ props.class }><LoginComponent /></Box>
-      );
-    }
-    
     if(props.custom){
       return (
         <a href={props.href} className={ props.class } title={props.title}>{props.title}</a>
@@ -91,7 +97,7 @@ function MenuMobile(props) {
     }
     else{
       return (
-        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title}}>
+        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}>
 
         </NavLink>
       );
@@ -110,14 +116,12 @@ function MenuMobile(props) {
       <div className={classes.menuContainer}>
         <Grid container className={classes.whiteNavContainer} alignItems="center" wrap="nowrap">
             <Grid item>
-            {
-              props.location.pathname === '/' ?
-                <img src={Logo} alt="Aquatica"/>
-                : 
-                <NavLink to="/"><img src={Logo} alt="Aquatica"/></NavLink>
-            }
+              <NavLink to={'/'} className={props.location.pathname === '/' ? classes.navLinkDisabled : ''}>
+                  <ChangingLogo logo1={LogoTop1} logo2={LogoTop2}/>
+              </NavLink>
             </Grid>
             <Grid item container className={classes.whiteNavItemsContainer} justify="flex-end" alignItems="center">
+            <Box component="div"><SearchComponent/></Box>
             <Hamburger
                 active={mobileMenuOpen}
                 type="collapse"
@@ -147,7 +151,6 @@ function MenuMobile(props) {
                 classActive={classes.whiteNavLinkSelected}
                 title={menuItem.title}
                 locationPath = {locationPath}
-                
               />
             ))
           }
@@ -162,9 +165,19 @@ function MenuMobile(props) {
                 classActive={classes.whiteNavLinkSelected}
                 title={menuItem.title}
                 locationPath = {locationPath}
-
+                parent={menuItem.parent}
               />
             ))
+          }
+          <Divider />
+          <Box component="div" className={ classes.mobileNavLink }><LoginComponent /></Box>
+          {
+          loggedUser && (
+            <React.Fragment>
+              <WishlistNum class={classes.mobileNavLink} closeAllSlides={closeAllSlides}/>
+              <ComparelistNum class={classes.mobileNavLink} closeAllSlides={closeAllSlides}/>
+            </React.Fragment>
+          )
           }
           {/*Mobile MegaMenu */}
           <Slide direction="down" in={mmOpen} timeout={ 700 } mountOnEnter unmountOnExit>

@@ -6,7 +6,7 @@ import theme from './theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 //Header, Nav, Footer
-import Header from '@/components/layout/Header';
+import Navigation from '@/components/layout/Navigation';
 import Footer from '@/components/layout/Footer';
 
 //Router
@@ -16,11 +16,12 @@ import MainRoutes from './routes';
 //Hook to scroll page to top
 import ScrollToTop from '@/hooks/ScrollTop';
 
-
+import {UserContextProvider} from '@/context/user-context';
 import {NavigationContextProvider} from '@/context/navigation-context';
 import {CategoriesContextProvider} from '@/context/categories-context';
 import {CollectionsContextProvider} from '@/context/collections-context';
-import {UserContextProvider} from '@/context/user-context';
+import {WishlistContextProvider} from '@/context/wishlist-num-context';
+import {ComparelistContextProvider} from '@/context/comparelist-num-context';
 
 function App() {
   return (
@@ -30,12 +31,18 @@ function App() {
       <NavigationContextProvider>
       <CategoriesContextProvider>
       <CollectionsContextProvider>
+      <WishlistContextProvider>
+      <ComparelistContextProvider>
         <Router>
             <ScrollToTop />
-            <Header />
+            <div style={{maxWidth: '2200px', margin: '0 auto'}}>
+            <Navigation />
             <MainRoutes />
             <Footer />
+            </div>
         </Router>
+      </ComparelistContextProvider>
+      </WishlistContextProvider>
       </CollectionsContextProvider>
       </CategoriesContextProvider>
       </NavigationContextProvider>

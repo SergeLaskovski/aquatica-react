@@ -3,8 +3,7 @@ import UseDataApi from '@/hooks/UseDataApi';
 
 // Create Context Object
 export const CollectionsContext = createContext({
-  collContext: {},
-  updateCollContext: () => {},
+  collContext: {}
 });
 
 // Create a provider for components to consume and subscribe to changes

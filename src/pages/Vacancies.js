@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {NavLink, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core';
 import styles from './VacanciesStyles.js';
@@ -107,10 +107,12 @@ function VacanciesPage(props) {
                 <Loader />
               )
         }
+        {/*
         <Box px={8} py={2} textAlign="center">
             <Box>Please contact us via contact form and specify the vacancy name</Box>
             <NavLink to="/contact-us" className={classes.aButtonBrown}>Apply</NavLink>
         </Box>
+        */}
         <Box p={6}/>
         <FooterContactBanner/>
             

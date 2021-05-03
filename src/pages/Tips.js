@@ -10,6 +10,8 @@ import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 import FourtyFour from '@/components/FourtyFour';
 
+import FooterContactBanner from '@/components/layout/FooterContactBanner';
+
 
 function TipsPage(props) {
 
@@ -74,6 +76,7 @@ function TipsPage(props) {
                                 </Box>
                             </Grid>
                         </Grid>
+                        {postsData.data.length>1 && (
                         <Box p={6}>
                             <Box py={3} px={3}><Typography variant="h2">More tips and videos</Typography></Box>
                             <Grid container className={classes.catsContainer} alignItems="stretch" justify="flex-start">
@@ -113,6 +116,7 @@ function TipsPage(props) {
                                 }
                             </Grid>
                         </Box>
+                        )}
                     </React.Fragment>
                 ) : (
                     <Loader />
@@ -130,7 +134,8 @@ function TipsPage(props) {
             :
                 <DisplayAllPosts/>
             }
-            
+            <Box p={6}/>
+            <FooterContactBanner/>
         </React.Fragment>
     )
 }

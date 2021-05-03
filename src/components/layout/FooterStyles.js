@@ -1,26 +1,7 @@
 
 
 const styles = (theme) => ({
-    footerColumnMenu: {
-        width: '40%',
-        padding: '2%',
-        [theme.breakpoints.down('md')]: {
-            width: '100%',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        }
-    },
-    footerColumn: {
-        width: '60%',
-        [theme.breakpoints.down('md')]: {
-            width: '100%',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '100%',
-        }
-    },
-    footerMenuContainer: {
+   footerMenuContainer: {
         color: theme.palette.primary.light,
         fontSize: '1em'
     },
@@ -30,6 +11,7 @@ const styles = (theme) => ({
     },
     columns: {
         columnCount: 2,
+        padding: '0 2%'
     },
     footerMenuItem:{
         textDecoration: 'none',
@@ -45,9 +27,12 @@ const styles = (theme) => ({
         color: theme.palette.primary.light,
         backgroundColor: theme.palette.secondary.light,
     },
-    addrItem:{
-        padding: '2%'
-      }
+    footerColumn:{
+        padding: '2%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%'
+        },
+    }
   
 });
 
