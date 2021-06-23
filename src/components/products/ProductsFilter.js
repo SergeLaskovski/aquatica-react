@@ -17,8 +17,16 @@ import {FilterSettingsFunction, defaultFilter, applyFilter} from './FilterSettin
 function ProductsFilter(props) {
     const { classes, currentCat } = props;
 
-    const PRODUCTS_API_URL =
-        process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCTS + '?cat=' + currentCat.slug;
+    let PRODUCTS_API_URL = '';
+    let urlBase = '';
+
+    if(currentCat.slug === 'factory-shop'){
+        urlBase="factory-shop"
+        PRODUCTS_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCTS + '?shop=show';
+    } else {
+        PRODUCTS_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCTS + '?cat=' + currentCat.slug;
+    }
+    
     const productsData = UseDataApi(PRODUCTS_API_URL);
 
     let renderFilters = [];
@@ -116,7 +124,7 @@ function ProductsFilter(props) {
                             <span onClick={()=>setFilterSliderChecked(!filterSliderChecked)} className={classes.arrow}>&#9656; Show filter &#9656;</span>
                         )
                     }
-                    <ProducstList productsData={productsToShow} currentCat={currentCat.slug}/>
+                    <ProducstList productsData={productsToShow} currentCat={currentCat.slug} urlBase={urlBase}/>
                 </Grid>
             </Grid>
         )

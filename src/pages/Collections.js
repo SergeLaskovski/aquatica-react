@@ -21,8 +21,6 @@ import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 import FourtyFour from '@/components/FourtyFour';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 
 function Collections(props) {
 
@@ -192,7 +190,6 @@ function Collections(props) {
         <Box component="div" p={6}></Box>
         
       </CurrentProductContextProvider>
-      <FooterContactBanner/>
     </React.Fragment>
   )
 }

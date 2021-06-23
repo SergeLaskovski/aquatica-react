@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter, NavLink } from 'react-router-dom';
 
-
 import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
@@ -10,6 +9,8 @@ import { withStyles } from '@material-ui/core';
 import styles from './FooterStyles';
 import { Grid, Box, Typography } from '@material-ui/core';
 import FacebookIcon from '@material-ui/icons/Facebook';
+
+import FooterContactBanner from '@/components/layout/FooterContactBanner';
 
 import ChangingLogo from '@/components/layout/ChangingLogo';
 
@@ -26,8 +27,10 @@ function Footer(props) {
   const currDate = new Date();
   const year = currDate.getFullYear();
 
+
   return (
     <React.Fragment>
+      <FooterContactBanner/>
       <Grid container>
         <Grid xs={12} item>
           <Box textAlign="center" py={6}>

@@ -20,8 +20,6 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import {Hidden, Grid, Typography, Box} from '@material-ui/core';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 
 function Home(props) {
 
@@ -186,7 +184,7 @@ function Home(props) {
               brochuresData.data.map((brochure,index)=>(
                 
                 <Grid item xs={12} md={2} className={classes.brochureRootContainer} key={`brochure${index}`} >
-                  <a href={`${process.env.REACT_APP_BASE_URL}/cms/brochures?show=${brochure.title}`} target="_blank" rel="noopener noreferrer" title={brochure.title} className={classes.aNone}>
+                  <a href={`${process.env.REACT_APP_BASE_URL}/assets/brochures/${brochure.folder}/index.html`} target="_blank" rel="noopener noreferrer" title={brochure.title} className={classes.aNone}>
                     <div className={classes.brochureContainer}>
                       <div>{brochure.title}</div>
                       <span>Click to view</span>
@@ -233,8 +231,6 @@ function Home(props) {
           <span></span>
         )
       }
-
-      <FooterContactBanner/>
 
     </React.Fragment>
   );

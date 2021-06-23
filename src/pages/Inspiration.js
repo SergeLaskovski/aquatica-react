@@ -1,7 +1,5 @@
 import React, { useState, useCallback } from 'react';
 
-//import {withStyles} from '@material-ui/core';
-//import styles from './InspirationStyles.js';
 import { Box} from '@material-ui/core';
 
 import Gallery from "react-photo-gallery";
@@ -12,7 +10,6 @@ import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
 
 function Inspiration(props) {
 
@@ -63,7 +60,6 @@ function Inspiration(props) {
         }
         
         <Box p={6}/>
-        <FooterContactBanner/>
         </React.Fragment>
     )
 

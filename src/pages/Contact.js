@@ -180,6 +180,7 @@ function Contact(props) {
               <Loader />
             )
         }
+        <Box p={6}/>
         </React.Fragment>
     )
 

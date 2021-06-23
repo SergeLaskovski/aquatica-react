@@ -10,8 +10,6 @@ import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 import FourtyFour from '@/components/FourtyFour';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 
 function TipsPage(props) {
 
@@ -135,7 +133,6 @@ function TipsPage(props) {
                 <DisplayAllPosts/>
             }
             <Box p={6}/>
-            <FooterContactBanner/>
         </React.Fragment>
     )
 }

@@ -13,8 +13,6 @@ import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 function VacanciesPage(props) {
 
     const PAGE_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_CUSTOMPAGES + '/?page=vacancies';
@@ -114,8 +112,7 @@ function VacanciesPage(props) {
         </Box>
         */}
         <Box p={6}/>
-        <FooterContactBanner/>
-            
+           
         </React.Fragment>
     )
 }

@@ -10,9 +10,6 @@ import ProdCatSwitch  from '@/components/products/ProdCatSwitch';
 
 import {Box} from '@material-ui/core';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
-
 
 function Products(props) {
 
@@ -62,7 +59,6 @@ function Products(props) {
         <Box component="div" p={5}></Box>
         
       </CurrentProductContextProvider>
-      <FooterContactBanner/>
     </React.Fragment>
   )
 }

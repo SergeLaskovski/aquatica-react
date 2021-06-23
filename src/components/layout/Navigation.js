@@ -18,7 +18,7 @@ function Navigation(props) {
     let param = '';
     for (let i = 0; i < menuItems.length; i++) {
       //update context with current page ID
-      if (menuItems[i].path === props.location.pathname.replace(/\/+$/, "")) {
+      if (menuItems[i].path === '/'+props.location.pathname.split('/')[1]) {
         updateNavContext(menuItems[i].pageID);
       }
       param = menuItems[i].menu;

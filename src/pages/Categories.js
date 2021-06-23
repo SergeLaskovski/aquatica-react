@@ -11,9 +11,6 @@ import {Box} from '@material-ui/core';
 import FourtyFour from '@/components/FourtyFour';
 import Loader from '@/components/Loader';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
-
 function Categories(props) {
 
 
@@ -62,7 +59,6 @@ function Categories(props) {
             )
           }
         <Box component="div" p={5}></Box>
-        <FooterContactBanner/>
     </React.Fragment>
 
   )

@@ -97,7 +97,7 @@ function MenuMobile(props) {
     }
     else{
       return (
-        <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}>
+        <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}>
 
         </NavLink>
       );

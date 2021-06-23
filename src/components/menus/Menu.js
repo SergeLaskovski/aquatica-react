@@ -109,7 +109,7 @@ function TopMenus(props) {
         );
       } else {
         return (
-          <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+          <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
         );
       }
 

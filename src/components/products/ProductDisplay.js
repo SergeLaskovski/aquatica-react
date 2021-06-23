@@ -11,6 +11,7 @@ import {CollectionsContext} from '@/context/collections-context';
 import {Grid, Typography, Box} from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import GetAppIcon from '@material-ui/icons/GetAppOutlined';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import AddToWish from '@/components/layout/AddToWish';
 import AddToCompare from '@/components/layout/AddToCompare';
@@ -29,9 +30,11 @@ import FourtyFour from '@/components/FourtyFour';
 
 function Products(props) {
 
-  
   const {classes, productSlug} = props;
-
+  let facShop = false;
+  if(props.match.path.startsWith('/factory-shop/')){
+    facShop = true;
+  }
 
   const PRODUCT_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCT + '?product=' + productSlug;
   const productData = UseDataApi(PRODUCT_API_URL);
@@ -150,8 +153,20 @@ function Products(props) {
             <Grid container item xs={12} md={7} className={classes.productInfoContainer}>
               <Grid item md className={classes.flexGrow}>
                 <Typography variant="h2" dangerouslySetInnerHTML={{__html: product.title}}></Typography>
+                {
+                  (product.price && facShop) ?
+                    <Box component="div" pt={4} pl={4} display="flex" justifyContent="flex-end" alignItems="center">
+                      <Typography variant="h4" component="div">$ {product.price} NZD</Typography>
+                      <Box component="div" ml={2}>
+                        <a href={`${process.env.REACT_APP_BASE_URL}/cms/?add-to-cart=${product.id}&quantity=1`} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack}`}>
+                          <ShoppingCartIcon fontSize="small"/>&nbsp;&nbsp;Add to Cart
+                        </a>
+                      </Box>
+                    </Box>
+                    : ''
+                }
                 <Box component="div" py={3}>
-                  <Typography component="span" variant="body2">Stock Code:</Typography> <Typography  component="span"  variant="subtitle2">{product.code}</Typography>
+                  <Typography component="span" variant="body2">Stock Code:</Typography> <Box component="span" fontStyle="italic"><Typography  component="span"  variant="caption">{product.code}</Typography></Box>
                 </Box>
                 <Box component="div" className={classes.infoBoxOuter}>
                   <Box component="div" className={classes.infoBoxWrapper}>
@@ -209,7 +224,7 @@ function Products(props) {
                                             <img src={product.wels.img} alt="WELS raiting" className={classes.welsImg}/>
                                           </Grid>
                                           <Grid item>
-                                            <Box textAlign="center">{product.wels.desc}</Box>
+                                            <Box textAlign="center" dangerouslySetInnerHTML={{__html: product.wels.desc}}></Box>
                                           </Grid>
                                         </Grid>
                                         <span className={classes.closeBtn} onClick={()=>setAnchorElWels(null)}>&#215;</span>
@@ -254,9 +269,9 @@ function Products(props) {
                             </Box>
                         }
                         {
-                          product.cartridge &&
+                          product.cartridge && product.cartridge.trim().startsWith('SP') &&
                             <Box component="div" pt={2}>
-                              <Box component="span" fontWeight="bold">Cartridge/Mechanism:</Box> {product.cartridge}
+                              <Box component="span" fontWeight="bold">Cartridge/Mechanism:</Box> <Box component="span" fontStyle="italic">{product.cartridge}</Box>
                             </Box>
                         }
                         {

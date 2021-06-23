@@ -5,8 +5,6 @@ import {NavigationContext} from '@/context/navigation-context';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 function Page() {
   const {navContext} = useContext(NavigationContext);
   const currentPageID = navContext.current;
@@ -27,7 +25,7 @@ function Page() {
           <Loader />
       )
     }
-      <FooterContactBanner/>
+
     </React.Fragment>
   )
 }

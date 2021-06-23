@@ -9,11 +9,12 @@ import Popover from '@material-ui/core/Popover';
 const ProductCard = (productProps) => {
 
 
-    const {classes, product, currentCat,fullWidth} = productProps;
+    const {classes, product, currentCat, fullWidth} = productProps;
 
-    let urlBase = 'products';
-    if(productProps.urlBase){urlBase=productProps.urlBase}
-
+    let urlBase = '/products';
+    if(productProps.urlBase){urlBase="/"+productProps.urlBase;}
+    if(productProps.urlBase === 'factory-shop'){urlBase="";}
+    
     const [anchorElDesc, setAnchorElDesc] = React.useState(null);
     const openDescPop = Boolean(anchorElDesc);
     const popDescId = openDescPop ? 'desc-popover' : undefined;
@@ -119,13 +120,13 @@ const ProductCard = (productProps) => {
                             <Box component="div" pt={2}  dangerouslySetInnerHTML={{__html: product.short}}></Box>
                         }
                         <Box>
-                          <NavLink to={`/${urlBase}/${currentCat ? currentCat : product.catSlug}/${product.slug}`}>
+                          <NavLink to={`${urlBase}/${currentCat ? currentCat : product.catSlug}/${product.slug}`}>
                             more info
                           </NavLink>
                         </Box>
               </Box>
           </Popover>
-          <NavLink to={`/${urlBase}/${currentCat ? currentCat : product.catSlug}/${product.slug}`} className={classes.aNone}>
+          <NavLink to={`${urlBase}/${currentCat ? currentCat : product.catSlug}/${product.slug}`} className={classes.aNone}>
             <Grid
               container
               direction="column"

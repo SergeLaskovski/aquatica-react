@@ -14,8 +14,6 @@ import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 function Retailers(props) {
 
     const {classes} = props;
@@ -136,7 +134,6 @@ function Retailers(props) {
               )
         }
         <Box p={6}/>
-        <FooterContactBanner/>
         </React.Fragment>
     )
 

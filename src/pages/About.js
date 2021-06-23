@@ -15,8 +15,6 @@ import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 function About(props) {
 
     const {classes} = props;
@@ -139,7 +137,6 @@ function About(props) {
               )
         }
         <Box p={6}/>
-        <FooterContactBanner/>
         </React.Fragment>
     )
 

@@ -102,7 +102,7 @@ function MainRoutes() {
           )
         case "/factory-shop":
           return (
-            <Route key={index} path={`${route.path}`} component={components['FactoryShop']} />
+            <Route key={index} path={`${route.path}/:product?`} component={components['FactoryShop']} />
           )
         case "/tips-videos":
           return (

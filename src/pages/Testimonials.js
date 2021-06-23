@@ -8,8 +8,6 @@ import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
-
 
 function Testimonials(props) {
 
@@ -45,7 +43,6 @@ function Testimonials(props) {
                 </div>
             </Box>
             <Box p={6}/>
-            <FooterContactBanner/>
         </React.Fragment>
     )
 }

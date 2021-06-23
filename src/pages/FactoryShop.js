@@ -1,34 +1,30 @@
 import React from 'react';
 
-import {withStyles} from '@material-ui/core';
-import styles from './FactoryShopStyles.js';
-import { Box, Typography} from '@material-ui/core';
+import {CurrentProductContextProvider} from '@/context/current-product-context';
 
-//import ProducstList from '@/components/products/ProductsList';
-import FooterContactBanner from '@/components/layout/FooterContactBanner';
+import ProductsFilter from '@/components/products/ProductsFilter';
+import ProductDisplay from '@/components/products/ProductDisplay';
 
-function EcoOptions(props) {
+import {Box} from '@material-ui/core';
 
-    /*const {classes} = props;
+function FactoryShop(props) {
 
-    const IFrameComponent = (props) => {
-        return (
-              <Box dangerouslySetInnerHTML={{ __html: props.iframe }} />
-          );
-    }
-
-    const iframe = '<iframe src="http://aquatica.localhost.com/cms/cart/" width="100%" frameBorder="0"></iframe>';
-    <IFrameComponent iframe={iframe} />
-    */
-    return(
+    const currentCat = {"slug":"factory-shop"};
+    return (
         <React.Fragment>
-            <Box p={8}><Typography variant="h1">No items available at the moment</Typography></Box>
-        <Box p={6}/>
-        <FooterContactBanner/>
+        <CurrentProductContextProvider>
+
+            {
+            props.match.params.product ? (
+            <ProductDisplay productSlug={props.match.params.product}/>
+            ) :(
+                <ProductsFilter currentCat={currentCat}/>
+            )}
+            <Box component="div" p={5}></Box>
+            
+        </CurrentProductContextProvider>
         </React.Fragment>
     )
-
 }
 
-
-export default withStyles(styles)(EcoOptions);
+export default FactoryShop;
