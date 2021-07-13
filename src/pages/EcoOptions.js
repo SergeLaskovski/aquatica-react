@@ -67,10 +67,13 @@ function EcoOptions(props) {
                             <Grid container>
                                 <Grid item xs={12} md={6}>
                                     <Box component="div">
-                                        <img 
-                                            src={EcoPageData.data.img} alt="Aquatica Eco Options"
-                                            className={classes.imgSuperFluid}
-                                        />
+                                        {EcoPageData.data.img && (
+                                            <img 
+                                                src={EcoPageData.data.img} alt="Aquatica Eco Options"
+                                                className={classes.imgSuperFluid}
+                                            />
+                                            )
+                                        }
                                     </Box>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
@@ -160,7 +163,7 @@ function EcoOptions(props) {
                                             <Grid
                                                 item
                                                 className={classes.productImgContainer}
-                                                style={{backgroundImage: 'url("' + ecoPage.featuredImgs[1]['full'] + '")'}}
+                                                style={{backgroundImage: 'url("' + (typeof(ecoPage.featuredImgs[1]) !== 'undefined' ? ecoPage.featuredImgs[1]['full'] : '') + '")'}}
                                             >
                                             </Grid>
                                             <Grid item container 

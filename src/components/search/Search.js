@@ -70,7 +70,7 @@ function SearchComponent(props) {
                                 productsData.data.map((product,index)=>(
                                     <React.Fragment key={`wish${index}`}>
                                         <Grid item xs={12} md={3}>
-                                            <NavLink exact to={`/products/${product.catSlug}/${product.slug}`} className={classes.noLink}>
+                                            <NavLink to={`/products/${product.catSlug}/${product.slug}`} className={classes.noLink} onClick={handleClose}>
                                                 <Box mt={{xs: 3, md: 2}} mb={{xs: 2, md: 2}} className={classes.imgContainer}>
                                                     <img src={product.img} alt={product.name} className={classes.wishProductImg}/>
                                                 </Box>
@@ -83,7 +83,7 @@ function SearchComponent(props) {
                                         >
                                             <Box py={2} px={{xs:0,md:3}}>
                                                 <Box fontWeight="Bold">
-                                                    <NavLink exact to={`/products/${product.catSlug}/${product.slug}`} className={classes.noLink}>
+                                                    <NavLink to={`/products/${product.catSlug}/${product.slug}`} className={classes.noLink} onClick={handleClose}>
                                                         <Typography variant="h4" dangerouslySetInnerHTML={{__html: product.title}}></Typography>
                                                     </NavLink>
                                                 </Box>
@@ -152,7 +152,7 @@ function SearchComponent(props) {
                 classes={{ paper: classes.dialogRoot }}
             >
                 <span className={classes.closeBtn} onClick={handleClose}>&#215;</span>
-                <SearchItems/>
+                <SearchItems handleClose={handleClose}/>
             </Dialog>
         </React.Fragment>
     )

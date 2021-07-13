@@ -153,24 +153,26 @@ function Products(props) {
             <Grid container item xs={12} md={7} className={classes.productInfoContainer}>
               <Grid item md className={classes.flexGrow}>
                 <Typography variant="h2" dangerouslySetInnerHTML={{__html: product.title}}></Typography>
-                {
-                  (product.price && facShop) ?
-                    <Box component="div" pt={4} pl={4} display="flex" justifyContent="flex-end" alignItems="center">
-                      <Typography variant="h4" component="div">$ {product.price} NZD</Typography>
-                      <Box component="div" ml={2}>
-                        <a href={`${process.env.REACT_APP_BASE_URL}/cms/?add-to-cart=${product.id}&quantity=1`} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack}`}>
-                          <ShoppingCartIcon fontSize="small"/>&nbsp;&nbsp;Add to Cart
-                        </a>
-                      </Box>
-                    </Box>
-                    : ''
-                }
                 <Box component="div" py={3}>
                   <Typography component="span" variant="body2">Stock Code:</Typography> <Box component="span" fontStyle="italic"><Typography  component="span"  variant="caption">{product.code}</Typography></Box>
                 </Box>
                 <Box component="div" className={classes.infoBoxOuter}>
                   <Box component="div" className={classes.infoBoxWrapper}>
                     <Box component="div" className={classes.infoBox}>
+                    {
+                  (product.price && facShop) ?
+                    <Box component="div" display="flex" justifyContent="flex-end" alignItems="center">
+                      <Typography variant="h4" component="div">$ {product.price} NZD</Typography>
+                      {/*
+                      <Box component="div" ml={2}>
+                        <a href={`${process.env.REACT_APP_BASE_URL}/cms/?add-to-cart=${product.id}&quantity=1`} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack}`}>
+                          <ShoppingCartIcon fontSize="small"/>&nbsp;&nbsp;Add to Cart
+                        </a>
+                      </Box>
+                      */}
+                    </Box>
+                    : ''
+                }
                         {/*
                           product.colour &&
                             <Box component="div" pt={1}>
@@ -271,7 +273,7 @@ function Products(props) {
                         {
                           product.cartridge && product.cartridge.trim().startsWith('SP') &&
                             <Box component="div" pt={2}>
-                              <Box component="span" fontWeight="bold">Cartridge/Mechanism:</Box> <Box component="span" fontStyle="italic">{product.cartridge}</Box>
+                              <Box component="span" fontWeight="bold">Cartridge/Mechanism:</Box> <Box component="span" fontStyle="italic"><Typography  component="span"  variant="caption">{product.cartridge}</Typography></Box>
                             </Box>
                         }
                         {
@@ -285,11 +287,11 @@ function Products(props) {
 
                         {
                           product.short&&
-                            <Box component="div" pt={2}  dangerouslySetInnerHTML={{__html: product.short}}></Box>
+                            <Box component="div" fontStyle="italic" pt={2}  dangerouslySetInnerHTML={{__html: product.short}}></Box>
                         }
                         {
                           product.description &&
-                            <Box component="div" pt={2}  dangerouslySetInnerHTML={{__html: product.description}}></Box>
+                            <Box component="div" fontStyle="italic" pt={2}  dangerouslySetInnerHTML={{__html: product.description}}></Box>
                         }
                     </Box>
                   </Box>
