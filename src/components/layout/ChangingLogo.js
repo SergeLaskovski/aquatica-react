@@ -1,12 +1,14 @@
-import React, {useEffect} from 'react';
+//import React, {useEffect} from 'react';
+
+import React from 'react';
 
 import {withStyles} from '@material-ui/core';
-import {Box} from '@material-ui/core';
+//import {Box} from '@material-ui/core';
 
 import LogoPlain from '@/assets/images/aquatica-logo-plain.png';
-import LogoText from '@/assets/images/aquatica-logo-text.png';
+//import LogoText from '@/assets/images/aquatica-logo-text.png';
 import styles from './ChangingLogoStyles';
-import Fade from '@material-ui/core/Fade';
+//import Fade from '@material-ui/core/Fade';
 
 
 function ChangingLogo(props) {
@@ -14,6 +16,9 @@ function ChangingLogo(props) {
     const {classes} = props;
 
     let logo1 = LogoPlain;
+    
+    /*
+    
     let logo2 = LogoText;
 
     if(props.logo1 && props.logo2){
@@ -48,6 +53,10 @@ function ChangingLogo(props) {
             </Fade>
         </Box>
         )
+    */
+        return (
+            <img src={logo1} width={props.imgWidth} height={props.imgHeight} className={classes.imgFluid} alt="Aquatica logo"/>
+        );
 }
 
 export default withStyles(styles)(ChangingLogo);

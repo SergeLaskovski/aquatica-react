@@ -61,8 +61,27 @@ const styles = (theme) => ({
     color: theme.palette.secondary.main,
     textDecoration: 'none',
     textTransform: 'uppercase',
-   }
- 
+   },
+   popoverContainer:{
+    pointerEvents: "none"
+  },
+  popoverContent:{
+    boxShadow: theme.shadows[7],
+    maxWidth: '400px;',
+    pointerEvents: "auto"
+  },
+  closeBtn: {
+      position: 'absolute',
+      top: ' 10px',
+      right: '20px',
+      fontSize: '1.6em',
+      color: theme.palette.primary.main,
+      "&:hover":{
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      color: theme.palette.primary.dark
+      }
+  }
 });
 
 export default styles;

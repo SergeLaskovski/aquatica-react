@@ -18,10 +18,6 @@ import {UserContext} from '@/context/user-context';
 import WishlistNum from '@/components/layout/WishlistNum';
 import ComparelistNum from '@/components/layout/ComparelistNum';
 
-import ChangingLogo from '@/components/layout/ChangingLogo';
-
-import LogoTop1 from '@/assets/images/aquatica-logo-top-plain.png';
-import LogoTop2 from '@/assets/images/aquatica-logo-top-text.png';
 
 //Desktop Top black menu and White menu
 function TopMenus(props) {
@@ -108,8 +104,17 @@ function TopMenus(props) {
           </React.Fragment>
         );
       } else {
+        
         return (
-          <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+          <React.Fragment>
+            {
+              props.href==="/" ? (
+                <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+              ) : (
+                <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} dangerouslySetInnerHTML={{__html: props.title}}></NavLink>
+              )
+            }
+          </React.Fragment>
         );
       }
 
@@ -184,11 +189,9 @@ function TopMenus(props) {
       </Grid>
       <Grid container className={classes.whiteNavContainer} alignItems="center" wrap="nowrap">
           <Grid item>
-
                 <NavLink to={'/'} className={props.location.pathname === '/' ? classes.navLinkDisabled : ''}>
-                   <ChangingLogo logo1={LogoTop1} logo2={LogoTop2}/>
+                   <img src={`${process.env.REACT_APP_BASE_URL}/assets/images/aquatica-logo-top.png`} alt="Aquatica" className={classes.logo}/>
                 </NavLink>
-
           </Grid>
           <Grid item container className={classes.whiteNavItemsContainer} justify="flex-end" alignItems="center">
             {
@@ -204,7 +207,7 @@ function TopMenus(props) {
               />
             ))
             }
-            <Box component="div" className={ props.class }><SearchComponent /></Box>
+            <Box component="div" className={classes.whiteNavLink }><SearchComponent /></Box>
           </Grid>
           <Slide direction="down" in={mmOpen} timeout={ 700 }  >
             <div className={classes.megamenu}>

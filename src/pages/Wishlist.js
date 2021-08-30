@@ -23,12 +23,14 @@ function Wishlist(props) {
     const WISHLIST_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCTS + "?wishlist="+loggedUser;
     const wishlistData = UseDataApi(WISHLIST_API_URL);
 
+    var wishlistDisplay4Print = [];
 
     const WishlistItems = (wishProps) => {
 
         let {updateWishNum} = React.useContext(WishlistContext);
 
         const [wishlistDisplay, setWishlistDisplay] = React.useState(wishProps.wishlistData);
+        wishlistDisplay4Print = wishlistDisplay;
 
         const removeWishHandler = (event,whishItem) =>{
 
@@ -58,26 +60,28 @@ function Wishlist(props) {
             }
         }
 
+
         return (
             <Grid container>
                 {
                 wishlistDisplay.map((product,index)=>(
                     <React.Fragment key={`wish${index}`}>
-                        <Grid item xs={12} md={2}>
+                        <Grid item xs={2}>
                             <Box mt={{xs: 4, md: 2}} mb={{xs: 2, md: 2}} className={classes.imgContainer}>
-                                <img src={product.img} alt={product.name} className={classes.wishProductImg}/>
+                                <img src={product.img} alt={product.name} className={classes.wishProductImg} style={{display:"block"}}/>
                             </Box>
                         </Grid>
-                        <Grid item container xs={12} md={8}
+                        <Grid item container xs={8}
                             direction="column"
                             justify="center"
                             alignItems="flex-start"
                         >
-                            <Box py={2} px={{xs:0,md:2}}>
+                            <Box py={2} px={{xs:2}}>
                                 <Box fontWeight="Bold">
                                     <NavLink exact to={`/products/${product.catSlug}/${product.slug}`}>
                                         <Typography variant="h3" dangerouslySetInnerHTML={{__html: product.title}}></Typography>
                                     </NavLink>
+                                    <Typography component="span" variant="body1">Stock Code:</Typography> <Box component="span" fontStyle="italic"><Typography  component="span"  variant="caption">{product.code}</Typography></Box>
                                 </Box>
                                 {
                                 product.short &&
@@ -93,7 +97,7 @@ function Wishlist(props) {
                             justify="center"
                             className={classes.removeLinkContainer}
                         >
-                            <a href="/#" onClick={(event)=>removeWishHandler(event,product.code)}>Remove</a>
+                            <a href="/#" id='remove-item' onClick={(event)=>removeWishHandler(event,product.code)}>Remove</a>
                                 
                         </Grid>
                     </React.Fragment>
@@ -103,8 +107,27 @@ function Wishlist(props) {
         )
     }
 
+    function printDiv(event,  wishlistDisplay) {
 
+        event.preventDefault();
+        event.stopPropagation();
+        
+        var printContents='';
+        wishlistDisplay.map((product,index)=>{
+            printContents += '<div style="display: flex; align-items: center; margin-top: 30px; border-bottom: 1px solid #CCCCCC;"><div><img src="'+product.img+'" width="300"></div><div><div><strong>'+product.title+'</strong></div><div>'+product.code+'</div><div>'+product.description+'</div></div></div>';
+            return true;
+        });
+    
 
+        document.body.innerHTML = '<!DOCTYPE html><html lang="en"><head><title>Aquatica - leading supplier of tapware, laundry tubs and stainless steel sinks in NZ</title></head><body>'+printContents+'</body></html>';
+    
+        setTimeout(function(){
+            window.print();
+            window.location.href = "/wishlist";
+        },1000);
+    
+    }
+    
     return(
         <React.Fragment>
             <Box px={8} py={4}>
@@ -113,7 +136,7 @@ function Wishlist(props) {
                         <Typography variant="h1">My List</Typography>
                        </Grid>
                     <Grid item>
-                        <a href="\#" className={classes.aButtonBrown} onClick={(event)=>printDiv(event,'printableArea')}>Print</a>
+                        <a href="\#" className={classes.aButtonBrown} onClick={(event)=>printDiv(event, wishlistDisplay4Print)}>Print</a>
                     </Grid>
                 </Grid>
                 
@@ -137,20 +160,5 @@ function Wishlist(props) {
     )
 
 }
-
-function printDiv(event,divName) {
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    var printContents = document.getElementById(divName).innerHTML;
-
-    document.body.innerHTML = printContents;
-
-    window.print();
-
-    window.location.href = "/wishlist";
-}
-
 
 export default withRouter(withStyles(styles)(Wishlist));

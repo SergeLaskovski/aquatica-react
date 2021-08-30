@@ -17,11 +17,6 @@ import {UserContext} from '@/context/user-context';
 import WishlistNum from '@/components/layout/WishlistNum';
 import ComparelistNum from '@/components/layout/ComparelistNum';
 
-import ChangingLogo from '@/components/layout/ChangingLogo';
-
-import LogoTop1 from '@/assets/images/aquatica-logo-top-plain.png';
-import LogoTop2 from '@/assets/images/aquatica-logo-top-text.png';
-
 import LoginComponent from '@/components/login/Login';
 import SearchComponent from '@/components/search/Search';
 
@@ -97,9 +92,15 @@ function MenuMobile(props) {
     }
     else{
       return (
-        <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}>
-
-        </NavLink>
+        <React.Fragment>
+        {
+          props.href==="/" ? (
+            <NavLink exact to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}></NavLink>
+          ) : (
+            <NavLink to={props.href} className={props.class} activeClassName={props.classActive} title={props.title} onClick={closeAllSlides}  dangerouslySetInnerHTML={{__html: props.title+(props.parent>0 ? '&nbsp;&nbsp;&#8212;&nbsp;&nbsp;' : '')}}></NavLink>
+          )
+        }
+      </React.Fragment>
       );
     }
   }
@@ -117,7 +118,7 @@ function MenuMobile(props) {
         <Grid container className={classes.whiteNavContainer} alignItems="center" wrap="nowrap">
             <Grid item>
               <NavLink to={'/'} className={props.location.pathname === '/' ? classes.navLinkDisabled : ''}>
-                  <ChangingLogo logo1={LogoTop1} logo2={LogoTop2}/>
+                <img src={`${process.env.REACT_APP_BASE_URL}/assets/images/aquatica-logo-top.png`}  className={classes.logo} alt="Aquatica"/>
               </NavLink>
             </Grid>
             <Grid item container className={classes.whiteNavItemsContainer} justify="flex-end" alignItems="center">
@@ -154,7 +155,7 @@ function MenuMobile(props) {
               />
             ))
           }
-          <Divider />
+          <Box my={2}><Divider /></Box>
           {
             menuArr.main.map((menuItem,index) => (
               <CustomNavLink 
@@ -169,7 +170,7 @@ function MenuMobile(props) {
               />
             ))
           }
-          <Divider />
+          <Box my={2}><Divider /></Box>
           <Box component="div" className={ classes.mobileNavLink }><LoginComponent /></Box>
           {
           loggedUser && (

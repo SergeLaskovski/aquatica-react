@@ -16,8 +16,6 @@ function Testimonials(props) {
     const TESTIMONIAL_API_URL = process.env.REACT_APP_API_BASE + '/testimonials';
     const testimonialsData = UseDataApi(TESTIMONIAL_API_URL);
     
-    console.log(TESTIMONIAL_API_URL);
-
     return (
         <React.Fragment>
             <Typography variant="h1" component="div">

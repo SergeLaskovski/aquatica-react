@@ -87,7 +87,7 @@ function Home(props) {
 
             <Hidden mdUp>
               <div className={classes.topTextMobile}>
-                  <div dangerouslySetInnerHTML={{__html: pageData.data.content}} />
+                  <div className={classes.topTextMobileCenter} dangerouslySetInnerHTML={{__html: pageData.data.content}} />
               </div>
             </Hidden>
           </React.Fragment>
@@ -172,7 +172,7 @@ function Home(props) {
       }
 
 
-      <Grid container className={classes.brochuresRoot} direction="column" alignItems="stretch" justify="flex-start">
+      <Grid container className={classes.brochuresRoot} style={{backgroundImage: 'url('+pageData.data.brochuresImage+')'}} direction="column" alignItems="stretch" justify="flex-start">
           <Grid item className={classes.brochuresHeaderContainer}>
               <Typography variant="h1">Download one of<br/>our brochures!</Typography>
           </Grid>
@@ -183,7 +183,7 @@ function Home(props) {
             ) : brochuresData.load ? (
               brochuresData.data.map((brochure,index)=>(
                 
-                <Grid item xs={12} md={2} className={classes.brochureRootContainer} key={`brochure${index}`} >
+                <Grid item xs={12} md={2} className={classes.brochureRootContainer} key={`brochure${index}`}>
                   <a href={`${process.env.REACT_APP_BASE_URL}/assets/brochures/${brochure.folder}/index.html`} target="_blank" rel="noopener noreferrer" title={brochure.title} className={classes.aNone}>
                     <div className={classes.brochureContainer}>
                       <div>{brochure.title}</div>

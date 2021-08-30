@@ -25,28 +25,22 @@ function LandingPageImage(props) {
         };
     }
 
-    // const getAppStyle = () => {
-    //     return {
-    //         backgroundImage: "linear-gradient(90deg, rgba(255,255,255,0) 70%, rgba(255,255,255,1) 100%), url('"+bgImage+"')"
-    //     };
-    // }
     verifyImageURL(imgSRC);
-    console.log(bgImage);
 
-    // return (
-    //     <Box className={classes.topContainer}>
-    //         <Box className={`${classes.imgContainer} ${bgImage.length>0 ? '': classes.imgContainerNarrow}`}  style={getAppStyle()} ></Box>
-    //         <Typography variant="h1" component="h1" className={classes.h1}>{title}</Typography>
-    //     </Box>
-    // )
     return (
         <React.Fragment>
-            {
-            bgImage && (
-                <img src={bgImage} className={classes.imgFluid} alt={title}/>
-            )
+            {   
+                title !== 'undefined' && (
+                    <React.Fragment>
+                    {
+                        bgImage && (
+                            <img src={bgImage} className={classes.imgFluid} alt={title}/>
+                        )
+                    }
+                    <Box p={6}><Typography variant="h1" component="h1" >{title}</Typography></Box>
+                    </React.Fragment>
+                )
             }
-            <Box p={6}><Typography variant="h1" component="h1" >{title}</Typography></Box>
         </React.Fragment>
     )
 }

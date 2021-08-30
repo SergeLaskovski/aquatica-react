@@ -23,7 +23,7 @@ const formStyles = (theme) => ({
         minWidth: 240,
     },
     selectEmpty: {
-        marginTop: theme.spacing(2),
+        
     },
     textFieldFileInput : {
         paddingLeft: '30px'

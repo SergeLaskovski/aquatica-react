@@ -6,12 +6,13 @@ import styles from './ProductDisplayStyles';
 
 import {CurrentProductContext} from '@/context/current-product-context';
 import {CollectionsContext} from '@/context/collections-context';
+import {CategoriesContext} from '@/context/categories-context';
 
 
 import {Grid, Typography, Box} from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import GetAppIcon from '@material-ui/icons/GetAppOutlined';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+//import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import AddToWish from '@/components/layout/AddToWish';
 import AddToCompare from '@/components/layout/AddToCompare';
@@ -77,6 +78,28 @@ function Products(props) {
       }
     }
     return currentColSlug;
+  }
+
+  //get category PDF
+  const catData = React.useContext(CategoriesContext);
+
+  const getCatPdf = (catSlug) => {
+    
+    let pdfLink = '';
+    let catsObj = {};
+    catsObj = catData.data;
+    for (let key in catsObj) {
+      if (catsObj.hasOwnProperty(key)) {
+          // eslint-disable-next-line
+        catsObj[key].forEach((item)=>{
+          if(item.slug === catSlug){
+            pdfLink =  item.pdf;
+          }
+        });
+      }
+    }
+    return pdfLink;
+    
   }
 
   const drawStars = (stars=0) =>{
@@ -262,6 +285,9 @@ function Products(props) {
                                   }
                                 </Grid>
                             </Grid>
+                            <Box component="div" pt={0} fontSize=".7rem">
+                              <a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/what-is-WELS.pdf`} target="_blank" rel="noopener noreferrer" title='What is WELS anyway?' >What is WELS anyway?</a>
+                            </Box>
                           </Box>
                         }
                         {
@@ -274,6 +300,12 @@ function Products(props) {
                           product.cartridge && product.cartridge.trim().startsWith('SP') &&
                             <Box component="div" pt={2}>
                               <Box component="span" fontWeight="bold">Cartridge/Mechanism:</Box> <Box component="span" fontStyle="italic"><Typography  component="span"  variant="caption">{product.cartridge}</Typography></Box>
+                            </Box>
+                        }
+                        {
+                          getCatPdf(product.catSlug) &&
+                            <Box component="div" pt={2}>
+                              <a href={getCatPdf(product.catSlug)} target="_blank" rel="noopener noreferrer" title='compare all models' >Click here to compare all models</a>
                             </Box>
                         }
                         {

@@ -79,7 +79,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                         coloursRange.push(key);
                     }
                 }
-                if( coloursRange.length>0 ){
+                if( coloursRange.length>1 ){
                     renderFilters.push({ name: name, fieldName: fieldName, range: coloursRange });
                 }
             }
@@ -96,7 +96,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                         shapesRange.push(key);
                     }
                 }
-                if( shapesRange.length>0 ){
+                if( shapesRange.length>1 ){
                     renderFilters.push({ name: name, fieldName: fieldName, range: shapesRange });
                 }
             }
@@ -113,7 +113,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                         sizesRange.push(key);
                     }
                 }
-                if( sizesRange.length>0 ){
+                if( sizesRange.length>1 ){
                     renderFilters.push({ name: name, fieldName: fieldName, range: sizesRange });
                 }
             }
@@ -147,7 +147,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                              pressuresRange.push(key);
                     }
                 }
-                if( pressuresRange.length>0 ){
+                if( pressuresRange.length>1 ){
                     renderFilters.push({ name: name, fieldName: fieldName, range: pressuresRange });
                 }
             }

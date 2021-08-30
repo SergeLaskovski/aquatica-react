@@ -36,12 +36,12 @@ function Retailers(props) {
     
 
     let mapData = {};
-    const retailersByCity = {};
-    const cities = [];
+    let retailersByCity = {};
+    let cities = [];
     if(retailersData.load){
       //create retailers array by city
       retailersData.data.map((retailer) => {
-        if( !retailersByCity[retailer.city] ){ 
+        if( typeof(retailersByCity[retailer.city]) === "undefined" ){ 
           retailersByCity[retailer.city] = []; 
           cities.push(retailer.city);
         }
@@ -95,8 +95,8 @@ function Retailers(props) {
                     <Box p={6}>
                       <Grid container>
                         <Grid item xs={12} lg={4}>
-                          <FormControl variant="filled" className={classes.formControl}>
-                            <InputLabel id="city-select-label">Select city</InputLabel>
+                          <FormControl className={classes.formControl}>
+                            <InputLabel id="city-select-label">Select area</InputLabel>
                             <Select
                               labelId="city-select-label"
                               id="city-select"
@@ -118,8 +118,8 @@ function Retailers(props) {
                                 retailerCity !== "" && (
                                     retailersByCity[retailerCity].map((retailerByCityData, index) => (
                                       <Box py={2} key={`retailerByCity${index}`}>
-                                        <Typography variant="h2">{retailerByCityData.title}</Typography>
-                                        <Typography variant="subtitle1">{retailerByCityData.address}</Typography>
+                                        <Typography variant="h4" dangerouslySetInnerHTML={{__html: retailerByCityData.title}}></Typography>
+                                        <Typography variant="body1" dangerouslySetInnerHTML={{__html: retailerByCityData.address}}></Typography>
                                         <Box dangerouslySetInnerHTML={{__html: retailerByCityData.text}}/>
                                       </Box>
                                     ))

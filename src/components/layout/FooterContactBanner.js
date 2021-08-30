@@ -23,7 +23,7 @@ function FooterContactBanner(props) {
         bannerData.load && ! bannerData.error ? (
           <Grid container className={classes.footerContact} style={{backgroundImage: 'url('+bannerData.data.image+')'}}  alignItems="center" justify="center">
               <Grid item container direction="column" alignItems="center" justify="center">
-                  <Typography variant="h1">{bannerData.data.text}</Typography>
+                  <Typography variant="h1" align="center">{bannerData.data.text}</Typography>
                   <Box element="div" m={3}>
                     {
                       bannerData.data.link && (

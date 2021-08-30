@@ -57,7 +57,7 @@ function CatsList(props) {
             className={classes.h100}
 
           >
-              <NavLink to={`/products/${props.cat.slug}`} className={`${classes.decorationNone} ${catDataAll.data[props.cat.id] && classes.linkDisabled}`}>
+              <NavLink to={catDataAll.data[props.cat.id] ? `/categories/${props.cat.slug}` : `/products/${props.cat.slug}`} className={`${classes.decorationNone}`}>
 
               <Grid
                 item

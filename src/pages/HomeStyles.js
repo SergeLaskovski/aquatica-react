@@ -1,6 +1,3 @@
-import bgMainBrochures from '@/assets/images/bg-main-brochures.jpg'
-
-
 const styles = (theme) => ({
   carouselContainer: {
     position: 'relative',
@@ -37,13 +34,18 @@ const styles = (theme) => ({
     fontSize: '1.4em'
   },
   topTextMobile: {
-    backgroundColor: theme.palette.primary.main,
+    //backgroundColor: theme.palette.primary.main,
     marginLeft: 'auto', 
     marginRight: 'auto',
     padding: '5%',
     textAlign: 'center',
     color: theme.palette.additional.white,
     fontSize: '1.1em'
+  },
+  topTextMobileCenter: {
+    [theme.breakpoints.down('lg')]: {
+      textAlign: 'center',
+    }
   },
   rangeProducts:{
     padding: "5% 10%",
@@ -91,13 +93,15 @@ const styles = (theme) => ({
   brochuresRoot:{
     ...theme.mixins.bgFluid,
     backgroundPosition: 'top center',
-    backgroundImage: 'url("'+bgMainBrochures+'")',
     color: theme.palette.additional.white,
     marginTop: '5%',
     padding: "10% 10% 0 10%",
   },
   brochuresHeaderContainer: {
     paddingBottom: "10%",
+    [theme.breakpoints.down('md')]: {
+      textAlign: "center"
+    }
   },
   brochureRootContainer:{
     height: '60px',

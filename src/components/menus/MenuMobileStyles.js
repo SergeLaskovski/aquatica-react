@@ -14,7 +14,7 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.additional.white,
       fontWeight: 100,
       fontSize: '15px',
-      height: '60px',
+      height: '80px',
     },
     whiteNavLink: {
       display: 'inline-block',
@@ -54,7 +54,7 @@ const styles = (theme) => ({
       }
     },
     mobileMenuPlaceholder: {
-      height: '60px',
+      height: '80px',
     },
     mobileMenuContainer:{
       height: '100%',
@@ -63,7 +63,7 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.additional.white,
       padding: '10px',
       position: 'fixed',
-      top: '60px',
+      top: '80px',
       left: 0,
       overflowY: "auto",
       "&::-webkit-scrollbar": {
@@ -92,7 +92,7 @@ const styles = (theme) => ({
     },
     megamenu:{
       position: 'fixed',
-      top: '60px',
+      top: '80px',
       left: 0,
       zIndex: '9',
       width: '100%',
@@ -102,6 +102,10 @@ const styles = (theme) => ({
     },
     navLinkDisabled: {
       pointerEvents: 'none'
+    },
+    logo:{
+      width: '160px',
+      marginLeft: '15px'
     }
 });
 

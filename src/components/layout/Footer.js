@@ -12,7 +12,6 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 import FooterContactBanner from '@/components/layout/FooterContactBanner';
 
-import ChangingLogo from '@/components/layout/ChangingLogo';
 
 function Footer(props) {
   
@@ -34,7 +33,7 @@ function Footer(props) {
       <Grid container>
         <Grid xs={12} item>
           <Box textAlign="center" py={6}>
-            <ChangingLogo imgWidth="350"/>
+            <img src={`${process.env.REACT_APP_BASE_URL}/assets/images/aquatica-logo-bottom.png`} className={classes.logo} alt="Aquatica"/>
           </Box>
         </Grid>
       </Grid>

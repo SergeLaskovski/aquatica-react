@@ -60,8 +60,8 @@ function Breadcrumbs(props) {
                         exact to={initial.url}
                         className={classes.breadcrumbLink}
                         title={initial.title}
+                        dangerouslySetInnerHTML={{__html: initial.title}}
                     >
-                        {initial.title}
                     </NavLink>
                     {
                     breadcrumbsData.data.map((breadcrumbsItem,index)=>(
@@ -71,8 +71,8 @@ function Breadcrumbs(props) {
                                 exact to={`${initial.url}${breadcrumbsItem.slug}`}
                                 className={classes.breadcrumbLink}
                                 title={breadcrumbsItem.name}
+                                dangerouslySetInnerHTML={{__html: breadcrumbsItem.name}}
                             >
-                                {breadcrumbsItem.name}
                             </NavLink>
                         ) : (
                             (props.isShowProduct) ? (
@@ -81,16 +81,14 @@ function Breadcrumbs(props) {
                                         exact to={`${initial.productsUrl}${breadcrumbsItem.slug}`}
                                         className={classes.breadcrumbLink}
                                         title={breadcrumbsItem.name}
+                                        dangerouslySetInnerHTML={{__html: breadcrumbsItem.name}}
                                     >
-                                        {breadcrumbsItem.name}
                                     </NavLink>
-                                    <Grid item className={classes.breadcrumbCurrent} key={`breadcrumb${index}`}>
-                                        {currProdContext.title}
+                                    <Grid item className={classes.breadcrumbCurrent} key={`breadcrumb${index}`} dangerouslySetInnerHTML={{__html: currProdContext.title}}>
                                     </Grid>
                                 </React.Fragment>
                             ) : (
-                                <Grid item className={classes.breadcrumbCurrent} key={`breadcrumb${index}`}>
-                                    {breadcrumbsItem.name}
+                                <Grid item className={classes.breadcrumbCurrent} key={`breadcrumb${index}`} dangerouslySetInnerHTML={{__html: breadcrumbsItem.name}}>
                                 </Grid>
                             )
                         )

@@ -12,7 +12,7 @@ const styles = (theme) => ({
       width: '33.3%',
     },
     [theme.breakpoints.down('sm')]: {
-      width: '50%',
+      width: '100%',
     }
   },
   aNone: theme.mixins.aNone,
@@ -29,6 +29,7 @@ const styles = (theme) => ({
     height: '350px',
     maxHeight: '350px',
     overflow: 'hidden',
+    cursor: 'pointer'
   },
   flexGrow: {
       flexGrow: 1,

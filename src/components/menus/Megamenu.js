@@ -115,10 +115,11 @@ function Megamenu(props) {
 
     const BgImageComponent = () =>{
         const {bgImage,updateBgImage} = React.useContext(CatMmBgImageContext);
+
         return (
             <Grid item xs={12} md={3}
                 className={classes.imgBG}
-                style={{backgroundImage: 'url('+bgImage+')'}} 
+                style={{backgroundImage: 'url('+bgImage.replace("(","%28").replace(")","%29")+')'}} 
                 onMouseOver={()=>updateBgImage('default')}
             />
         )

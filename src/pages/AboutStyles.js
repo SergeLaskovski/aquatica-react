@@ -10,7 +10,19 @@ const styles = (theme) => ({
   cardRoot: {
     width: '350px',
     height: '100%',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    overflowY: 'auto',
+    "&::-webkit-scrollbar": {
+      width: '7px'
+    },
+    "&::-webkit-scrollbar-track": {
+      boxShadow: 'inset 0 0 7px '+theme.palette.additional.darkgrey,
+      borderRadius: '2px',
+      //background: theme.palette.additional.light 
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: theme.palette.additional.darkgrey
+    }
   },
   cardMedia: {
     height: 350,

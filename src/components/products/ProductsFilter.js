@@ -8,11 +8,14 @@ import Loader from '@/components/Loader';
 import Error from '@/components/Error';
 
 import ProducstList from '@/components/products/ProductsList';
+import LandingPageImage from '@/components/layout/LandingPageImage';
 
 import { Grid, Typography, Box, Checkbox } from '@material-ui/core';
 import Slide from '@material-ui/core/Slide';
 
 import {FilterSettingsFunction, defaultFilter, applyFilter} from './FilterSettingsFunction'
+
+import Popover from '@material-ui/core/Popover';
 
 function ProductsFilter(props) {
     const { classes, currentCat } = props;
@@ -33,6 +36,12 @@ function ProductsFilter(props) {
 
     if (productsData.load) {
         renderFilters = FilterSettingsFunction(productsData.data);
+    }
+
+    const CustomLoader = () => {
+
+        return typeof(currentCat.slug) === "undefined" ? <Box p={4} textAlign="center">Please wait as due to the amount of products this may take up to 20 seconds to load</Box> : <Loader />
+
     }
 
     const FilterPtoducts = (props) => {
@@ -78,13 +87,41 @@ function ProductsFilter(props) {
             }
         }
 
-        
+        const [anchorElDesc, setAnchorElDesc] = React.useState(null);
+        const openDescPop = Boolean(anchorElDesc);
+        const popDescId = openDescPop ? 'desc-popover' : undefined;
 
-        
+        const handleDescPop = (event) =>{
+            event.preventDefault();
+            event.stopPropagation();
+            setAnchorElDesc(event.currentTarget);
+        }
+
+        const HowDoIKnowText = () => {
+            const PAGE_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_CUSTOMPAGES + '/?page=how-do-i-know-low';
+            const pageData = UseDataApi(PAGE_API_URL);
+
+            return(
+                <React.Fragment>
+                    {
+                     pageData.error ? (
+                        <Error />
+                        ) : pageData.load ? (
+                            <Box dangerouslySetInnerHTML={{__html: pageData.data.content}}></Box>
+                        ) : (
+                        <Loader />
+                        )
+                    }
+
+                </React.Fragment>
+            )
+        }
 
         return (
+            <React.Fragment>
+            <LandingPageImage img={`/LandingPages/${currentCat.title}.jpg`} title={`${currentCat.title}`}/>
             <Grid container className={classes.h100} alignItems="stretch">
-                    {renderFilters.length>0 && (
+                    { renderFilters.length>0 && (
                     <Slide direction="right" in={filterSliderChecked}>
                         <Grid item xs={4} md={2} className={`${classes.filtersMainContainer} ${!filterSliderChecked && classes.displayNone}`}>
                             <span onClick={()=>setFilterSliderChecked(!filterSliderChecked)} className={classes.arrow}>&#9666; Hide filter &#9666;</span>
@@ -95,7 +132,8 @@ function ProductsFilter(props) {
                                         <React.Fragment>
                                             <Typography variant="h3">{renderFilter.name}</Typography>
 
-                                            {renderFilter.range.map((rangeItem, index2) => (
+                                            {
+                                            renderFilter.range.map((rangeItem, index2) => (
                                                 <Grid container justify="space-between" alignItems="center" key={`filterItem${index2}`} wrap="nowrap">
                                                     <Grid item>
                                                         <Box px={1}>{rangeItem}</Box>
@@ -110,7 +148,35 @@ function ProductsFilter(props) {
                                                         />
                                                     </Grid>
                                                 </Grid>
-                                            ))}
+                                            ))
+                                            }
+                                            {
+                                            renderFilter.name === 'Pressure' &&
+                                                <React.Fragment>
+                                                <Box fontSize=".8rem"><a href="#how-do-i-know" onClick={(event)=>handleDescPop(event)}>How do I know I have low pressure?</a></Box>
+                                                <Popover
+                                                    className={classes.popoverContainer}
+                                                    id={popDescId}
+                                                    open={openDescPop}
+                                                    anchorEl={anchorElDesc}
+                                                    onClose={()=>setAnchorElDesc(null)}
+                                                    anchorOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'left',
+                                                    }}
+                                                    transformOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'left',
+                                                    }}
+                                                    classes={{ paper: classes.popoverContent }}
+                                                >
+                                                    <Box p={5} className={classes.popoverContent}>
+                                                            <HowDoIKnowText/>
+                                                    </Box>
+                                                    <span className={classes.closeBtn} onClick={()=>setAnchorElDesc(null)}>&#215;</span>
+                                                </Popover>
+                                                </React.Fragment>
+                                            }
                                         </React.Fragment>
                                     }
                                 </Box>
@@ -127,10 +193,10 @@ function ProductsFilter(props) {
                     <ProducstList productsData={productsToShow} currentCat={currentCat.slug} urlBase={urlBase}/>
                 </Grid>
             </Grid>
+            </React.Fragment>
         )
     };
-
-    return productsData.error ? <Error /> : productsData.load ? <FilterPtoducts /> : <Loader />;
+    return productsData.error ? <Error /> : productsData.load ? <FilterPtoducts /> : <CustomLoader/>;
 }
 
 export default withStyles(styles)(ProductsFilter);

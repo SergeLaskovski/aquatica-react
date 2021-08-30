@@ -32,6 +32,9 @@ const styles = (theme) => ({
         [theme.breakpoints.down('md')]: {
             width: '100%'
         },
+    },
+    logo:{
+        width:"350px"
     }
   
 });

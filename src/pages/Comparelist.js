@@ -66,7 +66,7 @@ function Comparelist(props) {
             ["Product","title"],
             ["Image","img"],
             //["Description","short"],
-            ["Price","price"],
+            //["Price","price"],
             ["Pressure","pressure"],
             ["Shape","shape"],
             ["Availability","stockStatus"],

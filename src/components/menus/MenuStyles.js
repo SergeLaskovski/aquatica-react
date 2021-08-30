@@ -1,7 +1,7 @@
 
 const styles = (theme) => ({
     topMenuPlaceholder:{
-      height: '90px'
+      height: '120px'
     },
     menuContainer: {
       flexGrow: 1,
@@ -18,10 +18,11 @@ const styles = (theme) => ({
       fontWeight: 100,
       fontSize: '1em',
       height: '30px',
-      paddingRight: '25px'
+      paddingRight: '33px'
     },
     topNavLink: {
       display: 'block',
+      textAlign: 'right',
       paddingLeft: '3%',
       color: theme.palette.additional.white,
       textDecoration: 'none',
@@ -46,20 +47,23 @@ const styles = (theme) => ({
       backgroundColor: theme.palette.additional.white,
       fontWeight: 100,
       fontSize: '15px',
-      height: '60px',
+      height: '90px',
+      paddingRight: '33px',
+      paddingLeft: '33px'
     },
     whiteNavItemsContainer : {
       flexGrow: 1,
-      marginRight: '25px'
     },
     whiteNavLink: {
-      display: 'inline-block',
-      paddingRight: '6%',
+      display: 'block',
+      textAlign: 'right',
+      marginLeft: '6%',
+      paddingTop: '10px',
       [theme.breakpoints.down('lg')]: {
-        paddingRight: '4%',
+        marginLeft: '4%',
       },
       [theme.breakpoints.down('md')]: {
-        paddingRight: '2%',
+        marginLeft: '3%',
       },
       textTransform: 'uppercase',
       color: theme.palette.additional.black,
@@ -113,6 +117,9 @@ const styles = (theme) => ({
       backgroundColor:  theme.palette.additional.black,
       fontSize: '12px !important',
       color: theme.palette.additional.white
+    },
+    logo:{
+      width: '180px',
     }
 });
 

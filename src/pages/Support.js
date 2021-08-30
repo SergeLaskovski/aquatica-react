@@ -5,11 +5,14 @@ import { withStyles } from '@material-ui/core';
 import styles from './SupportStyles.js';
 import { Grid, Typography, Box, TextField } from '@material-ui/core';
 
-import bgSupport from '@/assets/images/bg-support.jpg'
+import UseDataApi from '@/hooks/UseDataApi';
 
 function SupportPage(props) {
   
     const { classes } = props;
+
+    const PAGE_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_CUSTOMPAGES + '/?page=support';
+    const pageData = UseDataApi(PAGE_API_URL);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -65,7 +68,10 @@ function SupportPage(props) {
     return (
             <Grid container>
                 <Grid item xs={12} md={6} lg={4}>
-                    <img src={bgSupport} className={classes.imgFluid} alt="Aquatica Support"/>
+                    {
+                    pageData.load &&
+                    <img src={pageData.data.img} className={classes.imgFluid} alt="Aquatica Support"/>
+                    }
                 </Grid>
                 <Grid item xs={12} md={6} lg={8}>
                     <Box p={6}>

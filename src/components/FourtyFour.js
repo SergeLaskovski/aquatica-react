@@ -4,8 +4,7 @@ import {Box, Typography} from '@material-ui/core';
 function FourtyFour(props) {
   return (
     <Box element="div" m={2}>
-      <Typography variant="h1">Error 404</Typography>
-  <Typography variant="h2">{props.msg}</Typography>
+      <Typography variant="h2">{props.msg}</Typography>
     </Box>
   );
 }

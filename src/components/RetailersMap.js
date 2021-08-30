@@ -6,7 +6,7 @@ import mapboxgl from 'mapbox-gl';
 
 import {withStyles} from '@material-ui/core';
 import styles from './RetailersMapStyles.js';
-
+import "@/assets/css/map.css"; 
 
 const RetailersMap = (props) => {
     
@@ -140,7 +140,7 @@ const RetailersMap = (props) => {
       
         return (
           <div id={`popup-${id}`}>
-            <h4>{name}</h4>
+            <h4 dangerouslySetInnerHTML={{__html: name}}></h4>
             <div dangerouslySetInnerHTML={{__html: description}}></div>
           </div>
         );
