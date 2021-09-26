@@ -12,7 +12,7 @@ import {withStyles} from '@material-ui/core';
 import styles from './MegamenuStyles';
 import {Grid} from '@material-ui/core';
 import Collapse from '@material-ui/core/Collapse';
-
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 function Megamenu(props) {
 
@@ -88,7 +88,7 @@ function Megamenu(props) {
     const MegamenuItems = (props) => {
 
         return (
-
+            <ClickAwayListener onClickAway={props.closeAllSlides}>
             <Grid item xs={9} container justify="space-between" className={classes.mmContainer}>
                 {
                 mmData.data[0].map((mmTop,index) => (
@@ -109,6 +109,7 @@ function Megamenu(props) {
                 }
                                           
             </Grid>
+            </ClickAwayListener>
 
         )
     }
@@ -129,12 +130,11 @@ function Megamenu(props) {
         <Error />
       ) : mmData.load ? (
         <React.Fragment>
-
             <Grid container className={classes.root}>
                 <span className={classes.closeBtn} onClick={props.closeAllSlides}>&#215;</span>
                 <CatMmBgImageContextProvider>
                     <BgImageComponent/>
-                    <MegamenuItems/>
+                    <MegamenuItems closeAllSlides={props.closeAllSlides}/>
                 </CatMmBgImageContextProvider>
             </Grid>
 

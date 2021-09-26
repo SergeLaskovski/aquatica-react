@@ -32,13 +32,13 @@ export const FilterSettingsFunction = (productsData = []) => {
                 
                 colours = productItem.colour.split(',');
                 colours.map((colour) => {
-                    if( colour !== "N/A" ){ return (filters.colours[colour] = true); }
+                    if( colour !== "N/A" && colour !=='' ){ return (filters.colours[colour] = true); }
                     return false;
                 });
 
                 shapes = productItem.shape.split(',');
                 shapes.map((shape) => {
-                    if( shape !== "N/A" ){ return (filters.shapes[shape] = true); }
+                    if( shape !== "N/A" && shape !==''){ return (filters.shapes[shape] = true); }
                     return false;
                 });
 
@@ -80,6 +80,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                     }
                 }
                 if( coloursRange.length>1 ){
+                    coloursRange.sort();
                     renderFilters.push({ name: name, fieldName: fieldName, range: coloursRange });
                 }
             }
@@ -96,7 +97,8 @@ export const FilterSettingsFunction = (productsData = []) => {
                         shapesRange.push(key);
                     }
                 }
-                if( shapesRange.length>1 ){
+                if( shapesRange.length>1){
+                    shapesRange.sort();
                     renderFilters.push({ name: name, fieldName: fieldName, range: shapesRange });
                 }
             }
@@ -114,6 +116,7 @@ export const FilterSettingsFunction = (productsData = []) => {
                     }
                 }
                 if( sizesRange.length>1 ){
+                    sizesRange.sort();
                     renderFilters.push({ name: name, fieldName: fieldName, range: sizesRange });
                 }
             }

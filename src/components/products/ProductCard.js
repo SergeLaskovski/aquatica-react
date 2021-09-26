@@ -79,13 +79,13 @@ const ProductCard = (productProps) => {
                         {
                           product.pressure &&
                             <Box component="div" pt={1}>
-                              <Box component="span" fontWeight="BOld">Pressure:</Box>  {product.pressure}
+                              {product.pressure}
                             </Box>
                         }
                         {
                         product.wels &&
                           <Box pt={2}>
-                            <Box fontWeight="bold" className={classes.starBlack}> WELS Raiting</Box>
+                            <Box fontWeight="bold" className={classes.starBlack}> WELS Rating</Box>
                             <Box pl={2}>
 
                               { product.wels.mains>0 && (

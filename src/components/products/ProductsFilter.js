@@ -128,13 +128,13 @@ function ProductsFilter(props) {
                             <Typography align="right" className={classes.results}>{productsToShow.length} results</Typography>
                             {renderFilters.map((renderFilter, index) => (
                                 <Box component="div" className={classes.filtersContainer} key={`filterType${index}`}>
-                                    {renderFilter.range.length>1 &&
+                                    {renderFilter.range.length>0 &&
                                         <React.Fragment>
-                                            <Typography variant="h3">{renderFilter.name}</Typography>
+                                            <Typography variant="h4">{renderFilter.name}</Typography>
 
                                             {
                                             renderFilter.range.map((rangeItem, index2) => (
-                                                <Grid container justify="space-between" alignItems="center" key={`filterItem${index2}`} wrap="nowrap">
+                                                <Grid container justify="space-between" alignItems="flex-end" key={`filterItem${index2}`} wrap="nowrap">
                                                     <Grid item>
                                                         <Box px={1}>{rangeItem}</Box>
                                                     </Grid>
@@ -153,7 +153,7 @@ function ProductsFilter(props) {
                                             {
                                             renderFilter.name === 'Pressure' &&
                                                 <React.Fragment>
-                                                <Box fontSize=".8rem"><a href="#how-do-i-know" onClick={(event)=>handleDescPop(event)}>How do I know I have low pressure?</a></Box>
+                                                <Box  px={1} fontSize=".8rem"><a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/How do I know if I have low pressure.pdf`} target="_blank" rel="noopener noreferrer">How do I know if I have low pressure?</a></Box>
                                                 <Popover
                                                     className={classes.popoverContainer}
                                                     id={popDescId}

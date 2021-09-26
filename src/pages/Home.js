@@ -98,7 +98,11 @@ function Home(props) {
 
       <Grid container className={classes.rangeProducts}>
         <Grid item xs={12} md={8} container className={classes.rangeProductsText}>
-          <Typography variant="h2" component="h2">We have a wide range of products</Typography>
+          {
+              pageData.load && (
+                <Box component="div" dangerouslySetInnerHTML={{__html: pageData.data.range_of_products_text}}></Box>
+              )
+          }
         </Grid>
         <Grid item xs={12} md={4} container className={classes.rangeProductsButton} >
           <NavLink to="/products" className={classes.aButtonBrown}>All products</NavLink>

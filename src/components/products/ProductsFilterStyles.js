@@ -13,7 +13,7 @@ const styles = (theme) => ({
     padding: '0 2%',
     [theme.breakpoints.down('sm')]: {
       position: 'absolute',
-      top: 120,
+      top: 140,
       left: 0,
       zIndex: 3,
       boxShadow: theme.shadows[3],

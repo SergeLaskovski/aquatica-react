@@ -118,6 +118,31 @@ function Products(props) {
     )
   }
 
+  const renderCollectionLinks = (links) => {
+
+    let linksArr = [];
+    let existingLinksrr = [];
+
+    linksArr = links.split(',');
+
+    linksArr.map(link => {
+      let existingLink = getCollectionSlug(link);
+      if(existingLink )existingLinksrr.push({"name":link,"href":existingLink});
+      return true;
+    });
+
+    return (
+      <React.Fragment>
+        {
+        existingLinksrr.map((link,i) => (
+         <Box component="div" fontWeight="bold" key={`collection-link${i}`}>
+           View the entire <NavLink to={`/collections/${link.href}`}>{link.name}</NavLink> range
+          </Box>
+        ))
+        }
+      </React.Fragment>
+    );
+  }
   
   const [anchorElWels, setAnchorElWels] = React.useState(null);
   const openWelsPop = Boolean(anchorElWels);
@@ -246,7 +271,7 @@ function Products(props) {
                                     >
                                         <Grid container alignItems="center" justify="center" spacing={2}>
                                           <Grid item>
-                                            <img src={product.wels.img} alt="WELS raiting" className={classes.welsImg}/>
+                                            <img src={product.wels.img} alt="WELS rating" className={classes.welsImg}/>
                                           </Grid>
                                           <Grid item>
                                             <Box textAlign="center" dangerouslySetInnerHTML={{__html: product.wels.desc}}></Box>
@@ -293,7 +318,7 @@ function Products(props) {
                         {
                           product.stockStatus &&
                             <Box component="div" pt={2}>
-                              {product.stockStatus}{product.oosNarration}
+                              {product.stockStatus}.  {product.oosNarration}
                             </Box>
                         }
                         {
@@ -311,9 +336,7 @@ function Products(props) {
                         {
                           product.range &&
                             <Box component="div" pt={2}>
-                              <Box component="span" fontWeight="bold">
-                                View the entire <NavLink to={`/collections/${getCollectionSlug(product.range)}`}>{product.range}</NavLink> range
-                              </Box> 
+                              {renderCollectionLinks(product.range)}
                             </Box>
                         }
 
@@ -364,7 +387,7 @@ function Products(props) {
               product.wels &&
               <Grid item md>
                 <Box align="center">
-                  <img src={product.wels.img} alt="WELS raiting" className={classes.welsImg}/>
+                  <img src={product.wels.img} alt="WELS rating" className={classes.welsImg}/>
                   {product.wels.desc}
                 </Box>
               </Grid>

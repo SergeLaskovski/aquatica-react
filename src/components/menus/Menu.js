@@ -210,18 +210,19 @@ function TopMenus(props) {
             <Box component="div" className={classes.whiteNavLink }><SearchComponent /></Box>
           </Grid>
           <Slide direction="down" in={mmOpen} timeout={ 700 }  >
-            <div className={classes.megamenu}>
-              <Megamenu closeAllSlides={closeAllSlides}/>
-            </div>
+            
+              <div className={classes.megamenu}>
+                <Megamenu closeAllSlides={closeAllSlides}/>
+              </div>
+            
           </Slide>
           <Slide direction="down" in={collectionOpen} timeout={ 700 }  >
             <div className={classes.megamenu}>
-              <CollectionsMegaMenu />
+              <CollectionsMegaMenu closeAllSlides={closeAllSlides}/>
             </div>
           </Slide>
       </Grid>
       </div>       
-  
     </React.Fragment>
   )
 }

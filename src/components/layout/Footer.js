@@ -65,7 +65,7 @@ function Footer(props) {
         <Grid item className={classes.footerColumn}>
             <Typography variant="h4" className={classes.footerHeader}>Technical info</Typography><br/>
             <div><NavLink to="/tips-videos" className={classes.footerMenuItem} activeClassName={classes.footerMenuItemSelected}>Hints & Tips</NavLink></div>
-            <div><NavLink to="/tips-videos/wels-in-a-nutshell" className={classes.footerMenuItem} activeClassName={classes.footerMenuItemSelected}>WELLS Information</NavLink></div>
+            <div><NavLink to="/tips-videos/wels-in-a-nutshell" className={classes.footerMenuItem} activeClassName={classes.footerMenuItemSelected}>WELS Information</NavLink></div>
         </Grid>
       {
           pageData.error ? (
