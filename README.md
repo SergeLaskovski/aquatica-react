@@ -9,3 +9,8 @@ Check .env.development
 
 .env.production set to build for aquatica.co.nz
 
+Local development files structure
+/aquatica-react <----pull from github here
+/cms
+/assets
+
