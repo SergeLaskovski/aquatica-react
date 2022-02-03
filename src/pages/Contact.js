@@ -49,7 +49,7 @@ function Contact(props) {
                 setErrMessage(errMsg);
                 setSentMessage('');
             }
-            else{
+            if(response.data.status === 'mail_sent'){
                 setSentMessage(response.data.message);
                 setName('');
                 setEmail('');

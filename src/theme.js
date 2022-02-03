@@ -24,8 +24,8 @@ const theme = createMuiTheme({
           fontWeight: '400',
           fontSize: '16px;',
           color: colors.additional.black,
-          height: '100vh',
-          minHeight: '550px',
+          minHeight: '100vh',
+          height: '100%',
         },
         a: {
           color: colors.primary.main,
@@ -47,6 +47,11 @@ const theme = createMuiTheme({
           marginTop: 0,
           fontWeight: 500
         },
+        ul: {
+          margin: "2px 0px",
+          listStyleType: "circle",
+          paddingLeft: "1em"
+        }
       },
     },
 
@@ -198,8 +203,23 @@ const hoverCard = {
   ),
 }
 
+const customScroll = {
+  "&::-webkit-scrollbar": {
+    width: '5px'
+  },
+  "&::-webkit-scrollbar-track": {
+      boxShadow: 'inset 0 0 5px '+theme.palette.additional.darkgrey,
+      borderRadius: '2px',
+  },
+  "&::-webkit-scrollbar-thumb": {
+      background: theme.palette.additional.darkgrey
+  },
+  scrollbarColor: theme.palette.secondary.main + ' ' + theme.palette.additional.darkgrey,
+  scrollbarWidth: 'thin'
+}
 
 
+theme.mixins.customScroll = customScroll;
 theme.mixins.aButtonBrown = aButtonBrown;
 theme.mixins.aButtonBlack = aButtonBlack;
 theme.mixins.hovercard = hoverCard;

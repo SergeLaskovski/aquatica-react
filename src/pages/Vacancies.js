@@ -12,6 +12,7 @@ import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
 import Error from '@/components/Error';
+import {Hidden} from '@material-ui/core';
 
 function VacanciesPage(props) {
 
@@ -69,34 +70,53 @@ function VacanciesPage(props) {
                     <Grid item container spacing={3} justify="center" alignItems="center" className={classes.teamCardsContainer}>
                             {
                             VacanciesData.data.map((vacancy, index) => (
-                                <Flippy
-                                    flipOnHover={true} // default false
-                                    flipOnClick={true} // default false
-                                    flipDirection="horizontal" // horizontal or vertical
-                                    key={`teamMember${index}`}
-                                >
-                                    <FrontSide>
-                                        <Card className={classes.cardRoot}>
-                                            <CardContent>
-                                                <Typography variant="caption" component="div">
-                                                    {vacancy.date}
-                                                </Typography>
-                                                <Typography variant="h5" component="div">
-                                                    {vacancy.title}
-                                                </Typography>
-                                                <Box dangerouslySetInnerHTML={{__html: vacancy.short}}></Box>
-                                            </CardContent>
-                                        </Card>
-                                    </FrontSide>
-                                    <BackSide >
-                                        <Card className={classes.cardRoot}>
-                                            <CardContent>
-                                                <Typography variant="h3" dangerouslySetInnerHTML={{__html: vacancy.title}}></Typography>
-                                                <Box py={2} dangerouslySetInnerHTML={{__html: vacancy.text}}></Box>
-                                            </CardContent>
-                                        </Card>
-                                    </BackSide>
-                                </Flippy>
+                                <React.Fragment key={`teamMember${index}`}>
+                                    <Hidden smDown>
+                                        <Flippy
+                                            flipOnHover={true} // default false
+                                            flipOnClick={true} // default false
+                                            flipDirection="horizontal" // horizontal or vertical
+                                        >
+                                            <FrontSide>
+                                                <Card className={classes.cardRoot}>
+                                                    <CardContent>
+                                                        <Typography variant="caption" component="div">
+                                                            {vacancy.date}
+                                                        </Typography>
+                                                        <Typography variant="h5" component="div">
+                                                            {vacancy.title}
+                                                        </Typography>
+                                                        <Box dangerouslySetInnerHTML={{__html: vacancy.short}}></Box>
+                                                    </CardContent>
+                                                </Card>
+                                            </FrontSide>
+                                            <BackSide >
+                                                <Card className={classes.cardRoot}>
+                                                    <CardContent>
+                                                        <Typography variant="h3" dangerouslySetInnerHTML={{__html: vacancy.title}}></Typography>
+                                                        <Box py={2} dangerouslySetInnerHTML={{__html: vacancy.text}}></Box>
+                                                    </CardContent>
+                                                </Card>
+                                            </BackSide>
+                                        </Flippy>
+                                    </Hidden>
+                                    <Hidden mdUp>
+                                        <Box pt={2}>
+                                            <Card className={classes.cardRootMobile}>
+                                                <CardContent>
+                                                    <Typography variant="caption" component="div">
+                                                        {vacancy.date}
+                                                    </Typography>
+                                                    <Typography variant="h5" component="div">
+                                                        {vacancy.title}
+                                                    </Typography>
+                                                    <Box dangerouslySetInnerHTML={{__html: vacancy.short}}></Box>
+                                                    <Box py={2} dangerouslySetInnerHTML={{__html: vacancy.text}}></Box>
+                                                </CardContent>
+                                            </Card>
+                                        </Box>
+                                    </Hidden>
+                                </React.Fragment>
                             ))
                             } 
                     </Grid>

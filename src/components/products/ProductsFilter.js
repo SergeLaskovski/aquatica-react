@@ -91,11 +91,11 @@ function ProductsFilter(props) {
         const openDescPop = Boolean(anchorElDesc);
         const popDescId = openDescPop ? 'desc-popover' : undefined;
 
-        const handleDescPop = (event) =>{
-            event.preventDefault();
-            event.stopPropagation();
-            setAnchorElDesc(event.currentTarget);
-        }
+        // const handleDescPop = (event) =>{
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     setAnchorElDesc(event.currentTarget);
+        // }
 
         const HowDoIKnowText = () => {
             const PAGE_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_CUSTOMPAGES + '/?page=how-do-i-know-low';
@@ -153,7 +153,7 @@ function ProductsFilter(props) {
                                             {
                                             renderFilter.name === 'Pressure' &&
                                                 <React.Fragment>
-                                                <Box  px={1} fontSize=".8rem"><a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/How do I know if I have low pressure.pdf`} target="_blank" rel="noopener noreferrer">How do I know if I have low pressure?</a></Box>
+                                                <Box  px={1} fontSize=".8rem"><a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/How do I know if I have low pressure.pdf`} target="_blank" rel="noreferrer">How do I know if I have low pressure?</a></Box>
                                                 <Popover
                                                     className={classes.popoverContainer}
                                                     id={popDescId}

@@ -131,7 +131,7 @@ const RetailersMap = (props) => {
         // clean up on unmount
         return () => map.remove();
       }
-    }, [mapCenter, retailersData]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [mapCenter, retailersData]);
 
 
     

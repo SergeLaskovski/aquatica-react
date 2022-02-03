@@ -38,19 +38,21 @@ function EcoOptions(props) {
                 <React.Fragment>
                     {
                     ecoBoxesArr.map((ecoBox, index) => (
-                        <NavLink to={ecoBox.link} className={ecoBox.link ? classes.aNoneBox : classes.disabled} key={`ecobox${index}`}>
-                            <Grid container direction={index%2===0 ? 'row' : 'row-reverse'} spacing={0}>
-                                <Grid item xs={12} md={6}>
-                                        <img 
-                                            src={ecoBox.img} alt="Aquatica Eco Options"
-                                            className={classes.imgHoverFluid}
-                                        />
+                        ecoBox.text && (
+                            <NavLink to={ecoBox.link} className={ecoBox.link ? classes.aNoneBox : classes.disabled} key={`ecobox${index}`}>
+                                <Grid container direction={index%2===0 ? 'row' : 'row-reverse'} spacing={0}>
+                                    <Grid item xs={12} md={6}>
+                                            <img 
+                                                src={ecoBox.img} alt="Aquatica Eco Options"
+                                                className={classes.imgHoverFluid}
+                                            />
+                                    </Grid>
+                                    <Grid item xs={12} md={6} container alignItems="center">
+                                        <Grid item><Box px={6} dangerouslySetInnerHTML={{__html: ecoBox.text}}/></Grid>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={12} md={6} container alignItems="center">
-                                    <Grid item><Box px={6} dangerouslySetInnerHTML={{__html: ecoBox.text}}/></Grid>
-                                </Grid>
-                            </Grid>
-                        </NavLink>
+                            </NavLink>
+                        )
                     ))
                     }
                 </React.Fragment>
@@ -78,15 +80,23 @@ function EcoOptions(props) {
                                 </Grid>
                                 <Grid item xs={12} md={6}>
                                     <Typography variant="h2" component="h2">
-                                        <Box px={8} pt={8} dangerouslySetInnerHTML={{__html: EcoPageData.data.title}}/>
+                                        <Box  p={{xs: 1, md: 6}} dangerouslySetInnerHTML={{__html: EcoPageData.data.title}}/>
                                     </Typography>
         
-                                    <Box px={8} py={4} dangerouslySetInnerHTML={{__html: EcoPageData.data.content}}/>
+                                    <Box p={{xs: 1, md: 6}} dangerouslySetInnerHTML={{__html: EcoPageData.data.content}}/>
                                 </Grid>
                             </Grid>
-                            <Box px={8}><Box component="div" p={8} dangerouslySetInnerHTML={{__html: EcoPageData.data.topText}}></Box></Box>
+                            {
+                            EcoPageData.data.topText && (
+                                <Box component="div"  p={{xs: 1, md: 6}} dangerouslySetInnerHTML={{__html: EcoPageData.data.topText}}></Box>
+                            )
+                            }
                             <EcoBoxes/>
-                            <Box px={8}><Box component="div" p={8} dangerouslySetInnerHTML={{__html: EcoPageData.data.bottomText}}></Box></Box>
+                            {
+                            EcoPageData.data.bottomText && (
+                                <Box component="div" p={{xs: 1, md: 6}} dangerouslySetInnerHTML={{__html: EcoPageData.data.bottomText}}></Box>
+                            )
+                            }
                         </React.Fragment>
                     
                     ) : (

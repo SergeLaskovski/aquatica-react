@@ -11,7 +11,6 @@ import Error from '@/components/Error';
 import {withStyles} from '@material-ui/core';
 import styles from './MegamenuStyles';
 import {Grid, Typography, Box} from '@material-ui/core';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 function CollectionsMegamenu(props) {
@@ -30,7 +29,7 @@ function CollectionsMegamenu(props) {
             updateBgImage(menuItemSLUG);
         }
         return (
-            <ClickAwayListener onClickAway={props.closeAllSlides}>
+
             <Grid item xs={12} md={9} container justify="space-between" className={classes.mmContainer}>
                 {
                 mmData.data[0].map((mmTop,index) => (
@@ -54,7 +53,6 @@ function CollectionsMegamenu(props) {
                     <NavLink to="/collections/" className={`${classes.allCollections}`} >All collections</NavLink>
                 </Grid>                          
             </Grid>
-            </ClickAwayListener>
         )
     }
 

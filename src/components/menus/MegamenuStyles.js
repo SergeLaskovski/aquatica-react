@@ -9,17 +9,7 @@ const styles = (theme) => ({
     height: '100%',
     paddingTop: '40px',
     overflowY: "auto",
-    "&::-webkit-scrollbar": {
-      width: '5px'
-    },
-    "&::-webkit-scrollbar-track": {
-      boxShadow: 'inset 0 0 5px '+theme.palette.secondary.dark,
-      borderRadius: '2px',
-      background: theme.palette.additional.light 
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: theme.palette.secondary.dark
-    },
+    ...theme.mixins.customScroll
   },
   imgBG: {
     //height: '100%',

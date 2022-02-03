@@ -60,6 +60,24 @@ function Retailers(props) {
       })
     }
 
+    const sortRetailers = (retailersData) => {
+      let suburb = {};
+      retailersData.map((rData) => {
+        if(typeof(suburb[rData.suburb]) === 'undefined') suburb[rData.suburb] = [];
+        suburb[rData.suburb].push(rData);
+        return true;
+      })
+
+      const ordered = Object.keys(suburb).sort().reduce(
+        (obj, key) => { 
+          obj[key] = suburb[key]; 
+          return obj;
+        }, 
+        {}
+      );
+      return ordered;
+    }
+
     return( 
         <React.Fragment>
         {
@@ -116,11 +134,18 @@ function Retailers(props) {
                         <Grid item xs={12} lg={6}>
                               {
                                 retailerCity !== "" && (
-                                    retailersByCity[retailerCity].map((retailerByCityData, index) => (
-                                      <Box py={2} key={`retailerByCity${index}`}>
-                                        <Typography variant="h4" dangerouslySetInnerHTML={{__html: retailerByCityData.title}}></Typography>
-                                        <Typography variant="body1" dangerouslySetInnerHTML={{__html: retailerByCityData.address}}></Typography>
-                                        <Box dangerouslySetInnerHTML={{__html: retailerByCityData.text}}/>
+                                  Object.entries(sortRetailers(retailersByCity[retailerCity])).map(([title, rData],index) => (
+                                      <Box pt={2}>
+                                        <Typography variant="h3" dangerouslySetInnerHTML={{__html: title}} key={`retailerArea${index}`}></Typography>
+                                        {
+                                          rData.map((retailerByCityData, index2) => (
+                                            <Box py={2} pl={3} key={`retailerByCity${index2}`}>
+                                              <Typography variant="h4" dangerouslySetInnerHTML={{__html: retailerByCityData.title}}></Typography>
+                                              <Typography variant="body1" dangerouslySetInnerHTML={{__html: retailerByCityData.address}}></Typography>
+                                              <Box dangerouslySetInnerHTML={{__html: retailerByCityData.text}}/>
+                                            </Box>
+                                          ))
+                                        }
                                       </Box>
                                     ))
                                 )

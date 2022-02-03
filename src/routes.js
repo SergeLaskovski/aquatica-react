@@ -23,6 +23,7 @@ import Tips from '@/pages/Tips';
 import Wishlist from '@/pages/Wishlist';
 import Comparelist from '@/pages/Comparelist';
 import Testimonials from '@/pages/Testimonials';
+import Cart from '@/pages/Cart';
 
 
 function MainRoutes() {
@@ -44,7 +45,8 @@ function MainRoutes() {
     Tips: Tips,
     Wishlist: Wishlist,
     Comparelist: Comparelist,
-    Testimonials: Testimonials
+    Testimonials: Testimonials,
+    Cart: Cart
   };
 
   const {navContext} = useContext(NavigationContext);
@@ -126,6 +128,8 @@ function MainRoutes() {
     updatedNavData.push({path: '/categories', component: 'Categories', title: 'Categories'});
     updatedNavData.push({path: '/wishlist', component: 'Wishlist', title: 'Wishlist'});
     updatedNavData.push({path: '/comparelist', component: 'Comparelist', title: 'Comparelist'});
+    updatedNavData.push({path: '/cart', component: 'Cart', title: 'Cart'});
+
 
     return updatedNavData.map((route, index) => (
       
@@ -133,7 +137,11 @@ function MainRoutes() {
     ));
   };
 
-  return navContext.error ? <Error /> : navContext.load ? <Switch>{FormRouter(navContext.data)}</Switch> : <Loader />;
+  return navContext.error ? <Error /> : navContext.load ? (
+    <React.Fragment>
+      <Switch>{FormRouter(navContext.data)}</Switch>
+    </React.Fragment>
+  ) : <Loader />;
 
 }
 

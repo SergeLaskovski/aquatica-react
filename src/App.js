@@ -4,6 +4,7 @@ import React from 'react';
 import {ThemeProvider} from '@material-ui/core/styles';
 import theme from './theme';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import "@/assets/css/bootstrap5.css"; 
 
 //Header, Nav, Footer
 import Navigation from '@/components/layout/Navigation';

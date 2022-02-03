@@ -7,17 +7,7 @@ const styles = (theme) => ({
     padding: '24px 10px 24px 0px',
     overflowY: "auto",
     backgroundColor: theme.palette.additional.white,
-    "&::-webkit-scrollbar": {
-      width: '5px'
-    },
-    "&::-webkit-scrollbar-track": {
-      boxShadow: 'inset 0 0 5px '+theme.palette.secondary.dark,
-      borderRadius: '2px',
-      background: theme.palette.additional.light 
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: theme.palette.secondary.dark
-    },
+    ...theme.mixins.customScroll
   },
   topLvlItem: {
     fontWeight: 'bold',

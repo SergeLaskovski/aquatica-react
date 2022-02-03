@@ -3,13 +3,11 @@ import { withRouter } from 'react-router-dom';
 
 function ScrollToTop({ history }) {
   useEffect(() => {
-    const unlisten = history.listen(() => {
+    setTimeout(function(){
       window.scrollTo(0, 0);
-    });
-    return () => {
-      unlisten();
-    }
-  }, [history]);
+    }, 300);
+
+  }, [history.location.pathname]);
 
   return (null);
 }

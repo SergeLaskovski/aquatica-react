@@ -12,10 +12,10 @@ import {CategoriesContext} from '@/context/categories-context';
 import {Grid, Typography, Box} from '@material-ui/core';
 import Popover from '@material-ui/core/Popover';
 import GetAppIcon from '@material-ui/icons/GetAppOutlined';
-//import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import AddToWish from '@/components/layout/AddToWish';
 import AddToCompare from '@/components/layout/AddToCompare';
+import AddToCart from '@/components/layout/AddToCart';
 
 import "@/assets/css/carousel.css"; 
 import { Carousel } from 'react-responsive-carousel';
@@ -31,11 +31,13 @@ import FourtyFour from '@/components/FourtyFour';
 
 function Products(props) {
 
-  const {classes, productSlug} = props;
+  const {classes, productSlug, cartData, updateCartData} = props;
   let facShop = false;
   if(props.match.path.startsWith('/factory-shop/')){
     facShop = true;
   }
+
+
 
   const PRODUCT_API_URL = process.env.REACT_APP_API_BASE + process.env.REACT_APP_API_PRODUCT + '?product=' + productSlug;
   const productData = UseDataApi(PRODUCT_API_URL);
@@ -144,6 +146,7 @@ function Products(props) {
     );
   }
   
+  //wels popover
   const [anchorElWels, setAnchorElWels] = React.useState(null);
   const openWelsPop = Boolean(anchorElWels);
   const popWelsId = openWelsPop ? 'wels-popover' : undefined;
@@ -154,6 +157,7 @@ function Products(props) {
     setAnchorElWels(event.currentTarget);
   }
 
+  
 
   //spare parts
   const SpareParts = (spareProps) => {
@@ -211,13 +215,12 @@ function Products(props) {
                   (product.price && facShop) ?
                     <Box component="div" display="flex" justifyContent="flex-end" alignItems="center">
                       <Typography variant="h4" component="div">$ {product.price} NZD</Typography>
-                      {/*
+
                       <Box component="div" ml={2}>
-                        <a href={`${process.env.REACT_APP_BASE_URL}/cms/?add-to-cart=${product.id}&quantity=1`} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack}`}>
-                          <ShoppingCartIcon fontSize="small"/>&nbsp;&nbsp;Add to Cart
-                        </a>
+                        <AddToCart productId={product.id} cartData={cartData} updateCartData={updateCartData}/>
                       </Box>
-                      */}
+                      
+
                     </Box>
                     : ''
                 }
@@ -227,18 +230,20 @@ function Products(props) {
                               <span className={classes.bullet}>&#8226;</span>{product.colour}
                             </Box>
                         */}
+                        <ul>
                         {
                           product.assembly&&
-                            <Box component="div" pt={1}>
-                              <span className={classes.bullet}>&#8226;</span>{product.assembly}
-                            </Box>
+                          <li>
+                              {product.assembly}
+                          </li>
                         }
                         {
                           product.pressure &&
-                            <Box component="div" pt={1}>
-                              <span className={classes.bullet}>&#8226;</span>{product.pressure}
-                            </Box>
+                            <li>
+                              {product.pressure}
+                            </li>
                         }
+                        </ul>
                         {
                         product.wels &&
                           <Box pt={2}>
@@ -311,7 +316,7 @@ function Products(props) {
                                 </Grid>
                             </Grid>
                             <Box component="div" pt={0} fontSize=".7rem">
-                              <a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/what-is-WELS.pdf`} target="_blank" rel="noopener noreferrer" title='What is WELS anyway?' >What is WELS anyway?</a>
+                              <a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/what-is-WELS.pdf`} target="_blank" download="pdf" rel="noreferrer" title='What is WELS anyway?' >What is WELS anyway?</a>
                             </Box>
                           </Box>
                         }
@@ -330,7 +335,7 @@ function Products(props) {
                         {
                           getCatPdf(product.catSlug) &&
                             <Box component="div" pt={2}>
-                              <a href={getCatPdf(product.catSlug)} target="_blank" rel="noopener noreferrer" title='compare all models' >Click here to compare all models</a>
+                              <a href={getCatPdf(product.catSlug)} target="_blank" rel="noreferrer" title='compare all models' >Click here to compare all models</a>
                             </Box>
                         }
                         {
@@ -358,13 +363,13 @@ function Products(props) {
                 <Box py={2} component="div" style={{display: 'inline-block'}}>
                   <Grid container spacing={2} justify="flex-start">
                     <Grid item>
-                      <a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/Aquatica Warranty 02020191.pdf`} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack} ${classes.justfyStart}`}>
+                      <a href={`${process.env.REACT_APP_BASE_URL}/assets/doc/Aquatica Warranty 02020191.pdf`} download="" target="_blank" title={product.title} className={`${classes.aButtonBlack} ${classes.justfyStart}`}>
                         <GetAppIcon fontSize="small"/>&nbsp;&nbsp;Warranty info
                       </a>
                     </Grid>
                     <Grid item>
                       {product.techSheet.length>0 &&
-                        <a href={product.techSheet} target="_blank" rel="noopener noreferrer" title={product.title} className={`${classes.aButtonBlack} ${classes.justfyStart}`}>
+                        <a href={`${process.env.REACT_APP_BASE_URL}/assets/TechSheets/${product.techSheet}.pdf`} target="_blank" download="" title={product.title} className={`${classes.aButtonBlack} ${classes.justfyStart}`}>
                           <GetAppIcon fontSize="small"/>&nbsp;&nbsp;Technical info
                         </a>
                     }

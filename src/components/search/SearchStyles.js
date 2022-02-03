@@ -12,17 +12,7 @@ const styles = (theme) => ({
         position: 'absolute',
         left: 10,
         top: 90,
-        "&::-webkit-scrollbar": {
-            width: '7px'
-          },
-          "&::-webkit-scrollbar-track": {
-            boxShadow: 'inset 0 0 5px '+theme.palette.additional.darkgrey,
-            borderRadius: '2px',
-            //background: theme.palette.additional.light 
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: theme.palette.additional.darkgrey
-          },
+        ...theme.mixins.customScroll
     },
     closeBtn: {
         position: 'absolute',

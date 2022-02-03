@@ -10,6 +10,7 @@ import Flippy, { FrontSide, BackSide } from 'react-flippy';
 
 import "@/assets/css/carousel.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import {Hidden} from '@material-ui/core';
 
 import UseDataApi from '@/hooks/UseDataApi';
 import Loader from '@/components/Loader';
@@ -94,15 +95,43 @@ function About(props) {
                                                 <Grid item xs={12}> </Grid>
                                             ) : (
                                                 <Grid>
-                                                    <Flippy
-                                                        flipOnHover={true} // default false
-                                                        flipOnClick={true} // default false
-                                                        flipDirection="horizontal" // horizontal or vertical
-                                                    >
-                                                        <FrontSide>
-                                                            <Card className={classes.cardRoot}>
+                                                    <Hidden smDown>
+                                                        <Flippy
+                                                            flipOnHover={true} // default false
+                                                            flipOnClick={true} // default false
+                                                            flipDirection="horizontal" // horizontal or vertical
+                                                        >
+                                                            <FrontSide>
+                                                                <Card className={classes.cardRoot}>
+                                                                    <CardMedia
+                                                                        className={classes.cardMedia}
+                                                                        image={teamMember.img ? teamMember.img : process.env.REACT_APP_BASE_URL+'/assets/images/product_img_placeholder.png'}
+                                                                        title={teamMember.name}
+                                                                    />
+                                                                    <CardContent>
+                                                                        <Typography variant="h5" component="div">
+                                                                            {teamMember.name}
+                                                                        </Typography>
+                                                                        <Box dangerouslySetInnerHTML={{__html: teamMember.position}}></Box>
+                                                                    </CardContent>
+                                                                </Card>
+                                                            </FrontSide>
+                                                            <BackSide >
+                                                                <Card className={classes.cardRoot}>
+                                                                    <CardContent>
+                                                                        <Typography variant="h3" dangerouslySetInnerHTML={{__html: teamMember.name}}></Typography>
+                                                                        <Typography variant="body2" dangerouslySetInnerHTML={{__html: teamMember.contatcs}}></Typography>
+                                                                        <Box py={2} dangerouslySetInnerHTML={{__html: teamMember.text}}></Box>
+                                                                    </CardContent>
+                                                                </Card>
+                                                            </BackSide>
+                                                        </Flippy>
+                                                    </Hidden>
+                                                    <Hidden mdUp>
+                                                        <Box pt={2}>
+                                                            <Card className={classes.cardRootMobile}>
                                                                 <CardMedia
-                                                                    className={classes.cardMedia}
+                                                                    className={classes.cardMediaMobile}
                                                                     image={teamMember.img ? teamMember.img : process.env.REACT_APP_BASE_URL+'/assets/images/product_img_placeholder.png'}
                                                                     title={teamMember.name}
                                                                 />
@@ -111,19 +140,12 @@ function About(props) {
                                                                         {teamMember.name}
                                                                     </Typography>
                                                                     <Box dangerouslySetInnerHTML={{__html: teamMember.position}}></Box>
-                                                                </CardContent>
-                                                            </Card>
-                                                        </FrontSide>
-                                                        <BackSide >
-                                                            <Card className={classes.cardRoot}>
-                                                                <CardContent>
-                                                                    <Typography variant="h3" dangerouslySetInnerHTML={{__html: teamMember.name}}></Typography>
                                                                     <Typography variant="body2" dangerouslySetInnerHTML={{__html: teamMember.contatcs}}></Typography>
                                                                     <Box py={2} dangerouslySetInnerHTML={{__html: teamMember.text}}></Box>
                                                                 </CardContent>
                                                             </Card>
-                                                        </BackSide>
-                                                    </Flippy>
+                                                        </Box>
+                                                    </Hidden>
                                                 </Grid>
                                             )
                                         }

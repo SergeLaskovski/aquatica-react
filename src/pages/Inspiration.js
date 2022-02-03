@@ -30,6 +30,23 @@ function Inspiration(props) {
         setCurrentImage(0);
         setViewerIsOpen(false);
     };
+
+    const customStyles = {
+        container: (base, state) => ({
+          ...base,
+          height: '100vh',
+        }),
+        view: () => ({
+            height: 'calc(100vh - 10px)',
+            '& > img': {
+                maxHeight: 'calc(100vh - 20px)',
+            },
+            alignItems: 'center',
+            display: 'flex ',
+            justifyContent: 'center',
+        })
+      }
+      
     
     return(
         <React.Fragment>
@@ -43,12 +60,13 @@ function Inspiration(props) {
                         {viewerIsOpen ? (
                         <Modal onClose={closeLightbox}>
                             <Carousel
-                            currentIndex={currentImage}
-                            views={pageData.data.map(x => ({
-                                ...x,
-                                srcset: x.srcSet,
-                                caption: x.title
-                            }))}
+                                currentIndex={currentImage}
+                                views={pageData.data.map(x => ({
+                                    ...x,
+                                    srcset: x.srcSet,
+                                    caption: x.title
+                                }))}
+                                styles={customStyles}
                             />
                         </Modal>
                         ) : null}

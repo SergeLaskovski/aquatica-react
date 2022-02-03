@@ -21,17 +21,7 @@ const styles = (theme) => ({
         overflow:'auto',
         height: '336px',
         width: '100%',
-        "&::-webkit-scrollbar": {
-            width: '5px'
-          },
-          "&::-webkit-scrollbar-track": {
-            boxShadow: 'inset 0 0 5px '+theme.palette.additional.darkgrey,
-            borderRadius: '2px',
-            //background: theme.palette.additional.light 
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: theme.palette.additional.darkgrey
-          },
+        ...theme.mixins.customScroll
     },
     infoBox: {
         direction: 'ltr',
